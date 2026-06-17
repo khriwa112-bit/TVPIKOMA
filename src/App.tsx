@@ -33,7 +33,7 @@ export default function App() {
     if (!widgetMsg.trim()) return;
     
     // Redirect to real WhatsApp API with customized text
-    const cleanMsg = encodeURIComponent(widgetMsg);
+    const cleanMsg = encodeURIComponent(`[tvpikoma] ${widgetMsg}`);
     window.open(`https://wa.me/447449708976?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
     setWidgetMsg("");
     setWhatsappWidgetOpen(false);
