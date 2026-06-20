@@ -36,6 +36,21 @@ export default function DrieMandenGratis() {
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 
   useEffect(() => {
+    document.title = "tvpikoma – 3 Maanden Gratis IPTV | Activeer Vandaag & Kijk Direct";
+    document.querySelector('meta[name="description"]')?.setAttribute("content",
+      "Krijg 3 maanden gratis bij tvpikoma! Bestel 12 maanden en kijk 15 maanden voor de prijs van 12. Activeer vandaag en kijk direct. Slechts €5,20/maand."
+    );
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/3maanden-Gratis");
+    return () => {
+      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
+      document.querySelector('meta[name="description"]')?.setAttribute("content",
+        "tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films & series in 4K/8K kwaliteit."
+      );
+      document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/");
+    };
+  }, []);
+
+  useEffect(() => {
     const timer = setInterval(() => setTimeLeft(getTimeUntilMidnight()), 1000);
     return () => clearInterval(timer);
   }, []);

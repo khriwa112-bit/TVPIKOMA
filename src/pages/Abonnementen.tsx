@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Check, MessageCircle } from "lucide-react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
@@ -28,6 +28,21 @@ const normalPrices: Record<BillingPeriod, Record<string, number>> = {
 export default function Abonnementen() {
   const [selectedPeriod, setSelectedPeriod] = useState<BillingPeriod>("12_plus_3_months");
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
+
+  useEffect(() => {
+    document.title = "tvpikoma Abonnementen – Kies het beste IPTV pakket | Vanaf €5/maand";
+    document.querySelector('meta[name="description"]')?.setAttribute("content",
+      "Bekijk alle tvpikoma IPTV abonnementen. Kies het beste pakket voor jouw situatie – Basis of Premium VIP+. Prijzen vanaf €5/maand. Direct actief na betaling."
+    );
+    document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/abonnementen");
+    return () => {
+      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
+      document.querySelector('meta[name="description"]')?.setAttribute("content",
+        "tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films & series in 4K/8K kwaliteit."
+      );
+      document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/");
+    };
+  }, []);
 
   const periodInfo = PRICING_MAPPING[selectedPeriod];
 

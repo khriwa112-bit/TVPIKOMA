@@ -8,7 +8,7 @@
     <!-- Primary SEO -->
     <title>tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K &amp; Onbeperkt Kijken</title>
     <meta name="description" content="tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films &amp; series in 4K/8K kwaliteit. Bestel vandaag je tvpikoma abonnement en kijk alles op elk apparaat." />
-    <meta name="keywords" content="tvpikoma, tvpikoma, IPTV Nederland, IPTV abonnement, beste IPTV, 4K IPTV, IPTV kanalen, IPTV kopen, tvpikoma abonnement, tvpikoma IPTV" />
+    <meta name="keywords" content="tvpikoma, IPTV Nederland, IPTV abonnement, beste IPTV, 4K IPTV, IPTV kanalen, IPTV kopen, tvpikoma abonnement, tvpikoma IPTV, tivipikoma" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="tvpikoma" />
     <link rel="canonical" href="https://tivipikoma.com/" />
@@ -37,6 +37,7 @@
       "@context": "https://schema.org",
       "@type": "Organization",
       "name": "tvpikoma",
+      "alternateName": "tivipikoma",
       "url": "https://tivipikoma.com/",
       "logo": "https://tivipikoma.com/favicon.ico",
       "description": "tvpikoma is de #1 IPTV provider van Nederland met 80.000+ kanalen en 200.000+ films & series in 4K kwaliteit.",
@@ -50,7 +51,7 @@
     }
     </script>
 
-    <!-- JSON-LD: WebSite -->
+    <!-- JSON-LD: WebSite + SiteLinksSearchBox -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -58,11 +59,19 @@
       "name": "tvpikoma",
       "url": "https://tivipikoma.com/",
       "description": "tvpikoma IPTV – 80.000+ kanalen, 4K kwaliteit, alle apparaten. De #1 IPTV provider van Nederland.",
-      "inLanguage": "nl-NL"
+      "inLanguage": "nl-NL",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": {
+          "@type": "EntryPoint",
+          "urlTemplate": "https://tivipikoma.com/?q={search_term_string}"
+        },
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
 
-    <!-- JSON-LD: Service -->
+    <!-- JSON-LD: Service with Offers -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -70,22 +79,118 @@
       "name": "tvpikoma IPTV Abonnement",
       "provider": {
         "@type": "Organization",
-        "name": "tvpikoma"
+        "name": "tvpikoma",
+        "url": "https://tivipikoma.com/"
       },
       "description": "tvpikoma biedt premium IPTV-abonnementen met 80.000+ kanalen, 200.000+ films & series, 4K/8K kwaliteit en 24/7 support.",
       "areaServed": ["NL", "BE"],
       "offers": [
         {
           "@type": "Offer",
-          "name": "tvpikoma Basis – 12 Maanden",
-          "price": "54.99",
-          "priceCurrency": "EUR"
+          "name": "tvpikoma Basis – 3 Maanden",
+          "price": "24.99",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
         },
         {
           "@type": "Offer",
-          "name": "tvpikoma Premium VIP+ – 12+3 Maanden",
+          "name": "tvpikoma Basis – 12 Maanden",
+          "price": "54.99",
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        },
+        {
+          "@type": "Offer",
+          "name": "tvpikoma Premium VIP+ – 12+3 Maanden Gratis",
           "price": "78.00",
-          "priceCurrency": "EUR"
+          "priceCurrency": "EUR",
+          "availability": "https://schema.org/InStock"
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: FAQ (rich results in Google) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Wat is tvpikoma IPTV en hoe werkt het precies?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "tvpikoma is een premium IPTV provider die televisie via het internet streamt. Je hebt geen schotel of coax-kabels meer nodig. Met een tvpikoma abonnement krijg je direct toegang tot meer dan 80.000+ live zenders, waaronder alle Nederlandse zenders, sportkanalen (ESPN, Ziggo, Viaplay) en een bibliotheek van 200.000+ films en series."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Hoe snel wordt mijn tvpikoma account geactiveerd?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "tvpikoma activeert je account direct na ontvangst van de betaling. De inloggegevens worden automatisch binnen 3 tot 5 minuten naar je e-mailadres verzonden."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Wat kost een tvpikoma abonnement?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "tvpikoma abonnementen starten vanaf €24,99 voor 3 maanden (€8,33/maand). Het populairste pakket is 12+3 maanden voor slechts €78,00 – dat is €5,20 per maand. Je krijgt dan 15 maanden IPTV voor de prijs van 12."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Op welke apparaten werkt tvpikoma?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "tvpikoma werkt op Smart TV (Samsung, LG, Sony), Amazon Fire TV Stick, Android TV boxen, Apple TV, smartphones (iOS/Android), tablets, PC en Mac. Kortom: alle apparaten."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Zit ik vast aan een contract bij tvpikoma?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nee, tvpikoma gebruikt uitsluitend flexibele pre-paid pakketten. Na de gekozen periode stopt het abonnement automatisch. Geen automatische incasso's en geen stilzwijgende verlengingen."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welke betaalmethoden accepteert tvpikoma?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "tvpikoma accepteert iDEAL (alle Nederlandse banken), Bancontact (België), PayPal en Creditcard (Visa/Mastercard)."
+          }
+        }
+      ]
+    }
+    </script>
+
+    <!-- JSON-LD: BreadcrumbList for sub-pages -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "tvpikoma",
+          "item": "https://tivipikoma.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Abonnementen",
+          "item": "https://tivipikoma.com/abonnementen"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "3 Maanden Gratis",
+          "item": "https://tivipikoma.com/3maanden-Gratis"
         }
       ]
     }
