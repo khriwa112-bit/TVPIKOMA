@@ -126,7 +126,7 @@ export default function Abonnementen() {
             </div>
             <h2 className="text-2xl font-extrabold text-green-900 mb-1">✦ PREMIUM VIP +</h2>
             <p className="text-green-800/70 text-xs uppercase tracking-widest mb-4">{periods.find(p => p.id === selectedPeriod)?.label?.toUpperCase()}</p>
-            <div className="text-5xl font-black text-green-900 mb-1">€{vipPrice.toFixed(2).replace(".", ",")}</div>
+            <div className="text-5xl font-black font-display text-green-900 mb-1">€{vipPrice.toFixed(2).replace(".", ",")}</div>
             <p className="text-green-800/60 text-xs mb-6">eenmalig · {periodInfo.months + periodInfo.bonusMonths} maanden totaal</p>
             <div className="flex flex-col gap-2 mb-6 flex-1">
               {["SD/HD/FULL HD/4K/8K/HDR-VR", "+80.000 Kanalen + Netflix", "RTL, NPO, ZIGGO, SBS, ESPN, Viaplay", "+200.000 Films & Series", "Alle Sport PPV Events", "VIP 24/7 Support", "VPN Inbegrepen"].map(f => (
@@ -145,7 +145,7 @@ export default function Abonnementen() {
           <div className="rounded-2xl border border-green-200 bg-gradient-to-b from-green-50 to-white p-8 flex flex-col shadow-sm">
             <h2 className="text-2xl font-extrabold text-green-900 mb-1 mt-2">Basis</h2>
             <p className="text-green-600 text-xs uppercase tracking-widest mb-4">{periods.find(p => p.id === selectedPeriod)?.label?.toUpperCase()}</p>
-            <div className="text-5xl font-black text-green-900 mb-1">€{normalPrice.toFixed(2).replace(".", ",")}</div>
+            <div className="text-5xl font-black font-display text-green-900 mb-1">€{normalPrice.toFixed(2).replace(".", ",")}</div>
             <p className="text-green-500 text-xs mb-6">eenmalig · {periodInfo.months} maanden</p>
             <div className="flex flex-col gap-2 mb-6 flex-1">
               {["SD/HD/FULL HD Kwaliteit", "+50.000 Kanalen + Netflix", "RTL, NPO, ZIGGO, SBS, ESPN", "+140.000 Films & Series", "24/7 Support NL & BE", "AntiFreeze Technologie", "VPN Inbegrepen"].map(f => (
