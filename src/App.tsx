@@ -1,4 +1,7 @@
 import { useState, FormEvent } from "react";
+import { Routes, Route } from "react-router-dom";
+import Abonnementen from "./pages/Abonnementen";
+import DrieMandenGratis from "./pages/DrieMandenGratis";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import ChannelSearch from "./components/ChannelSearch";
@@ -39,7 +42,7 @@ export default function App() {
     setWhatsappWidgetOpen(false);
   };
 
-  return (
+  const mainPage = (
     <div className="min-h-screen bg-dark-bg text-white selection:bg-white/20 selection:text-white flex flex-col font-sans" id="app-root-container">
       
       {/* 1. Header Navigation System */}
@@ -142,5 +145,13 @@ export default function App() {
       </div>
 
     </div>
+  );
+
+  return (
+    <Routes>
+      <Route path="/" element={mainPage} />
+      <Route path="/abonnementen" element={<Abonnementen />} />
+      <Route path="/3maanden-Gratis" element={<DrieMandenGratis />} />
+    </Routes>
   );
 }
