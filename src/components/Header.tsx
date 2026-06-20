@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { Menu, X, Shield } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface HeaderProps {
   onScrollTo: (selector: string) => void;
@@ -81,6 +82,16 @@ export default function Header({ onScrollTo, onOpenReseller }: HeaderProps) {
               <Shield className="w-3.5 h-3.5" /> Reseller
               <span className={`absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full ${pastHero ? "bg-amber-400" : "bg-green-600"}`} />
             </button>
+            <Link to="/abonnementen"
+              className={`relative px-3 py-1 transition-colors cursor-pointer group ${pastHero ? "hover:text-white" : "hover:text-green-900"}`}>
+              Abonnementen
+              <span className={`absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full ${pastHero ? "bg-amber-400" : "bg-green-600"}`} />
+            </Link>
+            <Link to="/3maanden-Gratis"
+              className={`relative px-3 py-1 transition-colors cursor-pointer group font-extrabold ${pastHero ? "text-amber-400 hover:text-amber-300" : "text-amber-500 hover:text-amber-600"}`}>
+              🎁 3 Mnd Gratis
+              <span className={`absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full bg-amber-400`} />
+            </Link>
           </nav>
 
           {/* Right actions */}
@@ -114,6 +125,14 @@ export default function Header({ onScrollTo, onOpenReseller }: HeaderProps) {
                 className={`font-semibold py-2 border-b flex items-center justify-center gap-1.5 transition-colors ${pastHero ? "text-green-200 hover:text-white border-green-700" : "text-green-700 border-green-50"}`}>
                 <Shield className="w-4 h-4" /> Wordt Reseller
               </button>
+              <Link to="/abonnementen" onClick={() => setMobileMenuOpen(false)}
+                className={`font-semibold py-2 border-b transition-colors ${pastHero ? "text-green-200 hover:text-white border-green-700" : "text-green-700 hover:text-green-900 border-green-50"}`}>
+                Abonnementen
+              </Link>
+              <Link to="/3maanden-Gratis" onClick={() => setMobileMenuOpen(false)}
+                className="font-extrabold py-2 border-b text-amber-500">
+                🎁 3 Maanden Gratis
+              </Link>
               <button onClick={() => { setMobileMenuOpen(false); onScrollTo("#pricing-section"); }}
                 className="w-full mt-2 py-3 rounded-lg bg-amber-400 text-green-900 font-bold">
                 Bekijk Prijzen
