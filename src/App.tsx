@@ -4,8 +4,6 @@ import Abonnementen from "./pages/Abonnementen";
 import DrieMandenGratis from "./pages/DrieMandenGratis";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import ChannelSearch from "./components/ChannelSearch";
-import SportsAndEntertainment from "./components/SportsAndEntertainment";
 import PricingCalculator from "./components/PricingCalculator";
 import Advantages from "./components/Advantages";
 import WhatsAppReviews from "./components/WhatsAppReviews";
@@ -56,14 +54,8 @@ export default function App() {
         {/* Core Hero Pitch */}
         <Hero onScrollTo={handleScrollTo} />
 
-        {/* 20k searchable IPTV stations visual drawer */}
-        <ChannelSearch />
-
         {/* Sport categories section like live site */}
         <SportCategories />
-
-        {/* Dynamic sport events, Dutch local movies, and shows switcher tabs */}
-        <SportsAndEntertainment />
 
         {/* Live calculating dynamic custom billing plan pricing widget */}
         <PricingCalculator />
