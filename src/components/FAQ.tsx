@@ -35,6 +35,7 @@ export default function FAQ() {
             <p className="text-xs text-green-600">Heb je een specifieke vraag? Stuur ons direct een WhatsApp-bericht.</p>
           </div>
           <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
+            onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
             className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-green-900 font-bold text-xs tracking-wide whitespace-nowrap text-center transition-colors">
             Stel via WhatsApp
           </a>

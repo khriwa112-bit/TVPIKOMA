@@ -57,6 +57,7 @@ export default function SetupWizard() {
               </div>
             </div>
             <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
+              onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
               className="mt-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-green-900 font-bold text-xs tracking-wide text-center uppercase shadow-lg block transition-colors">
               Vraag hulp gratis aan
             </a>

@@ -66,6 +66,7 @@ export default function WhatsAppReviews() {
           <MessageSquare className="w-4 h-4" /> Heb je zelf een vraag en wil je live met support praten?
         </p><br />
         <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
+          onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
           className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-amber-400 text-green-900 hover:bg-amber-500 font-bold text-xs tracking-wide transition-all uppercase shadow-lg">
           Start WhatsApp Chat &rarr;
         </a>

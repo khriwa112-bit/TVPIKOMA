@@ -64,6 +64,7 @@ export default function PricingCalculator() {
   ];
 
   const openWhatsApp = (plan: "VIP" | "Basis", price: number) => {
+    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
     const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
     const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
     window.open(`https://wa.me/447449708976?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");

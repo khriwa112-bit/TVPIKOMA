@@ -34,8 +34,7 @@ export default function App() {
   const handleWhatsappWidgetSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!widgetMsg.trim()) return;
-    
-    // Redirect to real WhatsApp API with customized text
+    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
     const cleanMsg = encodeURIComponent(`[tvpikoma] ${widgetMsg}`);
     window.open(`https://wa.me/447449708976?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
     setWidgetMsg("");

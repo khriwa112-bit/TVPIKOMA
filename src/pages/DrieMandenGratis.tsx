@@ -61,6 +61,7 @@ export default function DrieMandenGratis() {
   const savingsPct = Math.round(((originalPrice - price) / originalPrice) * 100);
 
   const openWhatsApp = () => {
+    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
     const msg = `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
@@ -82,6 +83,7 @@ export default function DrieMandenGratis() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
+            onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Activeer Nu
