@@ -1,4 +1,5 @@
 import { Mail, Phone, ShieldCheck } from "lucide-react";
+import { Link } from "react-router-dom";
 
 interface FooterProps {
   onScrollTo: (selector: string) => void;
@@ -59,6 +60,10 @@ export default function Footer({ onScrollTo, onOpenReseller }: FooterProps) {
                 className="flex items-center gap-2 text-amber-400 hover:text-amber-300 font-bold transition-colors text-left">
                 <ShieldCheck className="w-4 h-4 shrink-0" /> Wordt een Reseller
               </button>
+              <Link to="/reseller-pakket"
+                className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">
+                <ShieldCheck className="w-4 h-4 shrink-0" /> Reseller Pakketten
+              </Link>
               <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
                 onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
                 className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">

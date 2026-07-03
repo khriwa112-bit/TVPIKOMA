@@ -2,6 +2,7 @@ import { useState, FormEvent } from "react";
 import { Routes, Route } from "react-router-dom";
 import Abonnementen from "./pages/Abonnementen";
 import DrieMandenGratis from "./pages/DrieMandenGratis";
+import ResellerPack from "./pages/ResellerPack";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import PricingCalculator from "./components/PricingCalculator";
@@ -143,6 +144,7 @@ export default function App() {
       <Route path="/" element={mainPage} />
       <Route path="/abonnementen" element={<Abonnementen />} />
       <Route path="/3maanden-Gratis" element={<DrieMandenGratis />} />
+      <Route path="/reseller-pakket" element={<ResellerPack />} />
     </Routes>
   );
 }

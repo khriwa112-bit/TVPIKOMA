@@ -87,6 +87,11 @@ export default function Header({ onScrollTo, onOpenReseller }: HeaderProps) {
               Abonnementen
               <span className={`absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full ${pastHero ? "bg-amber-400" : "bg-green-600"}`} />
             </Link>
+            <Link to="/reseller-pakket"
+              className={`relative px-3 py-1 transition-colors cursor-pointer group ${pastHero ? "hover:text-white" : "hover:text-green-900"}`}>
+              Reseller Pakketten
+              <span className={`absolute bottom-0 left-3 right-3 h-0.5 scale-x-0 group-hover:scale-x-100 transition-transform duration-200 origin-left rounded-full ${pastHero ? "bg-amber-400" : "bg-green-600"}`} />
+            </Link>
             <Link to="/3maanden-Gratis"
               className={`relative px-3 py-1 transition-colors cursor-pointer group font-extrabold ${pastHero ? "text-amber-400 hover:text-amber-300" : "text-amber-500 hover:text-amber-600"}`}>
               🎁 3 Mnd Gratis
@@ -128,6 +133,10 @@ export default function Header({ onScrollTo, onOpenReseller }: HeaderProps) {
               <Link to="/abonnementen" onClick={() => setMobileMenuOpen(false)}
                 className={`font-semibold py-2 border-b transition-colors ${pastHero ? "text-green-200 hover:text-white border-green-700" : "text-green-700 hover:text-green-900 border-green-50"}`}>
                 Abonnementen
+              </Link>
+              <Link to="/reseller-pakket" onClick={() => setMobileMenuOpen(false)}
+                className={`font-semibold py-2 border-b transition-colors ${pastHero ? "text-green-200 hover:text-white border-green-700" : "text-green-700 hover:text-green-900 border-green-50"}`}>
+                Reseller Pakketten
               </Link>
               <Link to="/3maanden-Gratis" onClick={() => setMobileMenuOpen(false)}
                 className="font-extrabold py-2 border-b text-amber-500">
