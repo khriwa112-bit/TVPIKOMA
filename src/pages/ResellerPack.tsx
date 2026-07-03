@@ -83,12 +83,14 @@ export default function ResellerPack() {
 
   const orderPack = (pack: CreditPack) => {
     (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
+    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const msg = `[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${pack.name} pakket* (${pack.credits} credits) voor €${pack.price.toFixed(2).replace(".", ",")}.`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
   const requestTestPanel = () => {
     (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
+    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const msg = `[tvpikoma] Hallo, ik ben geïnteresseerd om reseller te worden. Kan ik eerst een gratis testpaneel krijgen?`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
@@ -108,7 +110,7 @@ export default function ResellerPack() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
-            onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
+            onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Bestel via WhatsApp
@@ -248,7 +250,7 @@ export default function ResellerPack() {
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("[tvpikoma] Hallo, ik wil graag meer weten over de reseller pakketten.")}`}
           target="_blank" rel="noopener noreferrer"
-          onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
+          onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
           className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-green-900 font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer shadow-lg"
         >
           <Gift className="w-4 h-4" /> Start als Reseller

@@ -65,7 +65,7 @@ export default function Footer({ onScrollTo, onOpenReseller }: FooterProps) {
                 <ShieldCheck className="w-4 h-4 shrink-0" /> Reseller Pakketten
               </Link>
               <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
-                onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })}
+                onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
                 className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">
                 <Phone className="w-4 h-4 shrink-0" /> WhatsApp 24/7 Support
               </a>

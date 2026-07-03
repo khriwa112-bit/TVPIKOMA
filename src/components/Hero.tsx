@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Play, ShieldCheck, Gift, ArrowRight, Phone } from "lucide-react";
+import { Play, ShieldCheck, Gift, ArrowRight, Phone, Star } from "lucide-react";
 
 interface HeroProps {
   onScrollTo: (selector: string) => void;
@@ -44,7 +44,7 @@ export default function Hero({ onScrollTo }: HeroProps) {
                   Bekijk prijzen
                 </button>
                 <div className="border-t border-green-100" />
-                <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer" onClick={() => (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' })} className="flex items-center justify-between text-green-900 hover:opacity-80 transition-opacity group">
+                <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer" onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }} className="flex items-center justify-between text-green-900 hover:opacity-80 transition-opacity group">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-full bg-green-100 border border-green-200 flex items-center justify-center">
                       <Phone className="w-3 h-3 text-green-700" />
@@ -95,12 +95,15 @@ export default function Hero({ onScrollTo }: HeroProps) {
 
         {/* Badges */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex items-center gap-6 mt-6">
+          className="flex flex-wrap items-center gap-6 mt-6">
           <div className="flex items-center gap-2 text-green-100 text-sm">
             <Play className="w-4 h-4 text-emerald-300 fill-emerald-300" /><span>Instant Activering</span>
           </div>
           <div className="flex items-center gap-2 text-green-100 text-sm">
             <ShieldCheck className="w-4 h-4 text-emerald-300" /><span>Geen Buffering</span>
+          </div>
+          <div className="flex items-center gap-2 text-green-100 text-sm">
+            <Star className="w-4 h-4 text-emerald-300 fill-emerald-300" /><span>#1 IPTV van Nederland volgens Reddit reviews</span>
           </div>
         </motion.div>
       </div>

@@ -34,6 +34,7 @@ export default function App() {
     e.preventDefault();
     if (!widgetMsg.trim()) return;
     (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
+    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const cleanMsg = encodeURIComponent(`[tvpikoma] ${widgetMsg}`);
     window.open(`https://wa.me/447449708976?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
     setWidgetMsg("");
