@@ -3,6 +3,7 @@ import { Routes, Route } from "react-router-dom";
 import Abonnementen from "./pages/Abonnementen";
 import DrieMandenGratis from "./pages/DrieMandenGratis";
 import ResellerPack from "./pages/ResellerPack";
+import { BlogList, BlogPostPage } from "./components/Blog";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import PricingCalculator from "./components/PricingCalculator";
@@ -148,6 +149,8 @@ export default function App() {
       <Route path="/abonnementen" element={<Abonnementen />} />
       <Route path="/3maanden-Gratis" element={<DrieMandenGratis />} />
       <Route path="/reseller-pakket" element={<ResellerPack />} />
+      <Route path="/blog" element={<BlogList />} />
+      <Route path="/blog/:slug" element={<BlogPostPage />} />
     </Routes>
   );
 }
