@@ -1,6 +1,5 @@
 import { motion } from "motion/react";
 import { Play, ShieldCheck, Gift, ArrowRight, Phone, CreditCard } from "lucide-react";
-import RedditIcon from "./RedditIcon";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 interface HeroProps {
@@ -16,14 +15,6 @@ export default function Hero({ onScrollTo }: HeroProps) {
       <div className="absolute top-[30%] right-[20%] w-[25%] h-[40%] rounded-full bg-teal-400/10 blur-[100px] pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-
-        {/* #1 Reddit trust badge — first thing visitors see */}
-        <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}
-          className="inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full bg-amber-400 shadow-lg shadow-amber-400/30 mb-4">
-          <span className="flex items-center justify-center w-6 h-6 rounded-full bg-green-900 text-amber-400 font-black text-[11px] shrink-0">#1</span>
-          <RedditIcon className="w-5 h-5 shrink-0" />
-          <span className="font-extrabold text-sm text-green-900 tracking-wide">IPTV van Nederland volgens Reddit reviews</span>
-        </motion.div>
 
         {/* Promo pill */}
         <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }}

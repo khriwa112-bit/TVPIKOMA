@@ -5,7 +5,6 @@ import DrieMandenGratis from "./pages/DrieMandenGratis";
 import ResellerPack from "./pages/ResellerPack";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
-import RedditStripe from "./components/RedditStripe";
 import PricingCalculator from "./components/PricingCalculator";
 import Advantages from "./components/Advantages";
 import WhatsAppReviews from "./components/WhatsAppReviews";
@@ -58,9 +57,6 @@ export default function App() {
         
         {/* Core Hero Pitch */}
         <Hero onScrollTo={handleScrollTo} />
-
-        {/* Swiping stripe of Reddit reviews */}
-        <RedditStripe />
 
         {/* Sport categories section like live site */}
         <SportCategories />
