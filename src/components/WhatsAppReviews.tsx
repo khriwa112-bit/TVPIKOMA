@@ -1,4 +1,5 @@
 import { MessageSquare } from "lucide-react";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 const ROW1 = Array.from({ length: 7 }, (_, i) => `/assets/reviews/chat-${i + 1}.png`);
 const ROW2 = Array.from({ length: 3 }, (_, i) => `/assets/reviews/chat-${i + 8}.png`);
@@ -46,6 +47,7 @@ function MarqueeRow({ images, reverse = false }: { images: string[]; reverse?: b
 }
 
 export default function WhatsAppReviews() {
+    const whatsappNumber = useWhatsAppNumber();
   return (
     <section className="bg-gradient-to-br from-emerald-800 to-green-900 text-white py-16 border-b-2 border-green-700" style={{ overflowX: "hidden" }} id="reviews-section">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,7 +67,7 @@ export default function WhatsAppReviews() {
         <p className="text-xs text-green-200 mb-4 inline-flex items-center gap-1.5 justify-center">
           <MessageSquare className="w-4 h-4" /> Heb je zelf een vraag en wil je live met support praten?
         </p><br />
-        <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
+        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"
           onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
           className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-amber-400 text-green-900 hover:bg-amber-500 font-bold text-xs tracking-wide transition-all uppercase shadow-lg">
           Start WhatsApp Chat &rarr;

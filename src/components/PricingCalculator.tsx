@@ -3,8 +3,10 @@ import { motion, AnimatePresence } from "motion/react";
 import { Check, RefreshCw, Copy } from "lucide-react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 export default function PricingCalculator() {
+    const whatsappNumber = useWhatsAppNumber();
   const [selectedPeriod, setSelectedPeriod] = useState<BillingPeriod>("12_plus_3_months");
 
   const getTimeUntilMidnight = () => {
@@ -68,7 +70,7 @@ export default function PricingCalculator() {
     (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
     const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
-    window.open(`https://wa.me/447449708976?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
   return (

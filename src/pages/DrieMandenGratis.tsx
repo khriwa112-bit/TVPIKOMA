@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Check, MessageCircle, Gift, Zap, Shield, Tv, Star } from "lucide-react";
-
-const WHATSAPP_NUMBER = "447449708976";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 const getTimeUntilMidnight = () => {
   const now = new Date();
@@ -32,6 +31,7 @@ const features = [
 ];
 
 export default function DrieMandenGratis() {
+  const WHATSAPP_NUMBER = useWhatsAppNumber();
   const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnight);
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 

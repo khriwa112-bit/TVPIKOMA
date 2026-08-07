@@ -1,7 +1,9 @@
 import { useState } from "react";
 import { Tv, Cpu, Tablet, BookOpen, Smartphone, Laptop } from "lucide-react";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 export default function SetupWizard() {
+    const whatsappNumber = useWhatsAppNumber();
   const [selectedDevice, setSelectedDevice] = useState<"smart_tv"|"firestick"|"android"|"apple"|"pc">("smart_tv");
   const devices = [
     { id: "smart_tv",  label: "Smart TV (Samsung/LG)", icon: <Tv className="w-4 h-4" /> },
@@ -56,7 +58,7 @@ export default function SetupWizard() {
                 <span className="font-bold text-green-900">Tip:</span> Installeer <strong className="text-green-900">IPTV Smarters Pro</strong> — de meest stabiele speler.
               </div>
             </div>
-            <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
+            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"
               onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
               className="mt-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-green-900 font-bold text-xs tracking-wide text-center uppercase shadow-lg block transition-colors">
               Vraag hulp gratis aan

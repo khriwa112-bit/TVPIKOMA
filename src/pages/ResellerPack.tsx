@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Check, MessageCircle, TrendingUp, Key, Users, ShieldCheck, Sparkles, Star, Gift } from "lucide-react";
-
-const WHATSAPP_NUMBER = "447449708976";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 interface CreditPack {
   id: string;
@@ -64,6 +63,7 @@ const faqs = [
 ];
 
 export default function ResellerPack() {
+  const WHATSAPP_NUMBER = useWhatsAppNumber();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {

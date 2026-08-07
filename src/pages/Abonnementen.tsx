@@ -2,8 +2,7 @@ import { useState, useEffect } from "react";
 import { Check, MessageCircle } from "lucide-react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
-
-const WHATSAPP_NUMBER = "447449708976";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 const periods: { id: BillingPeriod; label: string; sub: string; bonus?: boolean }[] = [
   { id: "3_months",         label: "3 Maanden",    sub: "€11,99/maand" },
@@ -26,6 +25,7 @@ const normalPrices: Record<BillingPeriod, Record<string, number>> = {
 };
 
 export default function Abonnementen() {
+  const WHATSAPP_NUMBER = useWhatsAppNumber();
   const [selectedPeriod, setSelectedPeriod] = useState<BillingPeriod>("12_plus_3_months");
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 

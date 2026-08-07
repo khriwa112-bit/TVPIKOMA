@@ -5,6 +5,7 @@ import DrieMandenGratis from "./pages/DrieMandenGratis";
 import ResellerPack from "./pages/ResellerPack";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import RedditStripe from "./components/RedditStripe";
 import PricingCalculator from "./components/PricingCalculator";
 import Advantages from "./components/Advantages";
 import WhatsAppReviews from "./components/WhatsAppReviews";
@@ -14,8 +15,10 @@ import ResellerModal from "./components/ResellerModal";
 import Footer from "./components/Footer";
 import SportCategories from "./components/SportCategories";
 import { MessageSquare, Phone, X, Send, ShieldAlert, Sparkles, Check } from "lucide-react";
+import { useWhatsAppNumber } from "../contexts/WhatsAppContext";
 
 export default function App() {
+    const whatsappNumber = useWhatsAppNumber();
   const [resellerOpen, setResellerOpen] = useState(false);
   const [whatsappWidgetOpen, setWhatsappWidgetOpen] = useState(false);
   const [widgetMsg, setWidgetMsg] = useState("");
@@ -36,7 +39,7 @@ export default function App() {
     (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
     (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const cleanMsg = encodeURIComponent(`[tvpikoma] ${widgetMsg}`);
-    window.open(`https://wa.me/447449708976?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
+    window.open(`https://wa.me/${whatsappNumber}?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
     setWidgetMsg("");
     setWhatsappWidgetOpen(false);
   };
@@ -55,6 +58,9 @@ export default function App() {
         
         {/* Core Hero Pitch */}
         <Hero onScrollTo={handleScrollTo} />
+
+        {/* Swiping stripe of Reddit reviews */}
+        <RedditStripe />
 
         {/* Sport categories section like live site */}
         <SportCategories />

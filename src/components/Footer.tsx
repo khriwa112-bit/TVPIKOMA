@@ -1,5 +1,6 @@
 import { Mail, Phone, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 interface FooterProps {
   onScrollTo: (selector: string) => void;
@@ -7,6 +8,7 @@ interface FooterProps {
 }
 
 export default function Footer({ onScrollTo, onOpenReseller }: FooterProps) {
+    const whatsappNumber = useWhatsAppNumber();
   return (
     <footer className="bg-gradient-to-br from-green-900 via-green-800 to-emerald-900 border-t-2 border-green-700 text-green-300 py-14 md:py-20" id="main-footer">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -64,7 +66,7 @@ export default function Footer({ onScrollTo, onOpenReseller }: FooterProps) {
                 className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">
                 <ShieldCheck className="w-4 h-4 shrink-0" /> Reseller Pakketten
               </Link>
-              <a href="https://wa.me/447449708976" target="_blank" rel="noreferrer"
+              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"
                 onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
                 className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">
                 <Phone className="w-4 h-4 shrink-0" /> WhatsApp 24/7 Support
