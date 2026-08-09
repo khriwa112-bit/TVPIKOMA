@@ -1,5 +1,5 @@
 import { useState, FormEvent } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Abonnementen from "./pages/Abonnementen";
 import DrieMandenGratis from "./pages/DrieMandenGratis";
 import ResellerPack from "./pages/ResellerPack";
@@ -147,7 +147,8 @@ export default function App() {
     <Routes>
       <Route path="/" element={mainPage} />
       <Route path="/abonnementen" element={<Abonnementen />} />
-      <Route path="/3maanden-Gratis" element={<DrieMandenGratis />} />
+      <Route path="/3-maanden-gratis" element={<DrieMandenGratis />} />
+      <Route path="/3maanden-Gratis" element={<Navigate to="/3-maanden-gratis" replace />} />
       <Route path="/reseller-pakket" element={<ResellerPack />} />
       <Route path="/blog" element={<BlogList />} />
       <Route path="/blog/:slug" element={<BlogPostPage />} />

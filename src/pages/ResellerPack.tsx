@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { Check, MessageCircle, TrendingUp, Key, Users, ShieldCheck, Sparkles, Star, Gift } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { applyPageMeta, DEFAULT_PAGE_META, setFaqPageSchema, setBreadcrumbSchema } from "../lib/pageMeta";
 
 interface CreditPack {
   id: string;
@@ -67,17 +69,21 @@ export default function ResellerPack() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
-    document.title = "tvpikoma Reseller Pakketten – Word IPTV Reseller | Vanaf €270";
-    document.querySelector('meta[name="description"]')?.setAttribute("content",
-      "Start je eigen IPTV onderneming met een tvpikoma reseller pakket. Kies Brons (120 credits, €270) of Zilver (240 credits, €500) en verkoop onder je eigen merknaam."
-    );
-    document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/reseller-pakket");
+    applyPageMeta({
+      title: "tvpikoma Reseller Pakketten – Word IPTV Reseller | Vanaf €270",
+      description:
+        "Start je eigen IPTV onderneming met een tvpikoma reseller pakket. Kies Brons (120 credits, €270) of Zilver (240 credits, €500) en verkoop onder je eigen merknaam.",
+      canonical: "https://tivipikoma.com/reseller-pakket",
+      ogTitle: "tvpikoma Reseller Pakketten – Word IPTV Reseller",
+      ogDescription:
+        "Start je eigen IPTV onderneming. 100% white label, hoge winstmarges, volledig beheerpaneel. Pakketten vanaf €270.",
+    });
+    setFaqPageSchema(faqs.map((f) => ({ question: f.q, answer: f.a })));
+    setBreadcrumbSchema([{ name: "Reseller Pakketten", path: "/reseller-pakket" }]);
     return () => {
-      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
-      document.querySelector('meta[name="description"]')?.setAttribute("content",
-        "tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films & series in 4K/8K kwaliteit."
-      );
-      document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/");
+      applyPageMeta(DEFAULT_PAGE_META);
+      setFaqPageSchema(null);
+      setBreadcrumbSchema(null);
     };
   }, []);
 
@@ -256,6 +262,16 @@ export default function ResellerPack() {
           <Gift className="w-4 h-4" /> Start als Reseller
         </a>
       </section>
+
+      {/* Related pages */}
+      <div className="max-w-5xl mx-auto px-4 py-6 flex flex-wrap items-center justify-center gap-3 text-xs">
+        <Link to="/abonnementen" className="px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-800 font-semibold hover:bg-green-100 transition-colors">
+          Zelf ook kijken? Bekijk abonnementen
+        </Link>
+        <Link to="/3-maanden-gratis" className="px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-800 font-semibold hover:bg-green-100 transition-colors">
+          🎁 3 maanden gratis actie
+        </Link>
+      </div>
 
       {/* Footer */}
       <footer className="bg-green-900 text-green-300 text-center text-xs py-6">

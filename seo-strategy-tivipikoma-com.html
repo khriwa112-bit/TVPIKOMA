@@ -1,0 +1,1184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SEO Strategy Report — tivipikoma.com</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --bg: #0a0a0f;
+    --bg-card: rgba(255,255,255,0.03);
+    --bg-card-hover: rgba(255,255,255,0.06);
+    --border: rgba(255,255,255,0.08);
+    --border-hover: rgba(255,255,255,0.15);
+    --text: #e8e8ed;
+    --text-secondary: #8b8b9e;
+    --text-muted: #5a5a6e;
+    --accent: #6366f1;
+    --accent-glow: rgba(99,102,241,0.3);
+    --green: #22c55e;
+    --green-bg: rgba(34,197,94,0.12);
+    --green-border: rgba(34,197,94,0.25);
+    --yellow: #eab308;
+    --yellow-bg: rgba(234,179,8,0.12);
+    --yellow-border: rgba(234,179,8,0.25);
+    --red: #ef4444;
+    --red-bg: rgba(239,68,68,0.12);
+    --red-border: rgba(239,68,68,0.25);
+    --blue: #3b82f6;
+    --blue-bg: rgba(59,130,246,0.12);
+    --orange: #f97316;
+    --orange-bg: rgba(249,115,22,0.12);
+    --orange-border: rgba(249,115,22,0.25);
+    --purple: #a78bfa;
+    --purple-bg: rgba(167,139,250,0.08);
+    --purple-border: rgba(167,139,250,0.15);
+    --radius: 16px;
+    --radius-sm: 10px;
+    --radius-xs: 6px;
+  }
+
+  ::selection { background: var(--accent); color: white; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(ellipse at 20% 50%, rgba(99,102,241,0.06) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 20%, rgba(139,92,246,0.04) 0%, transparent 50%),
+                radial-gradient(ellipse at 50% 80%, rgba(59,130,246,0.03) 0%, transparent 50%);
+    z-index: -1;
+    animation: ambientDrift 20s ease-in-out infinite;
+  }
+  @keyframes ambientDrift {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(-2%, 1%); }
+    66% { transform: translate(1%, -1%); }
+  }
+
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+
+  .header { padding: 40px 0 0; text-align: center; }
+  .header-badge {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 6px 16px; background: var(--bg-card); border: 1px solid var(--border);
+    border-radius: 100px; font-size: 12px; font-weight: 500; color: var(--text-secondary);
+    text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 20px;
+  }
+  .header-badge .dot {
+    width: 6px; height: 6px; border-radius: 50%; background: var(--green);
+    box-shadow: 0 0 8px var(--green); animation: pulse 2s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+  .header h1 {
+    font-family: 'Space Grotesk', sans-serif; font-size: 42px; font-weight: 700; line-height: 1.15;
+    margin-bottom: 12px; background: linear-gradient(135deg, #fff 0%, #a5a5c0 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .header .subtitle { font-size: 16px; color: var(--text-secondary); margin-bottom: 32px; }
+
+  .score-section {
+    display: flex; align-items: center; gap: 48px; margin-bottom: 40px; padding: 40px;
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius);
+    backdrop-filter: blur(20px);
+  }
+  .score-circle-wrap { position: relative; flex-shrink: 0; }
+  .score-circle {
+    width: 180px; height: 180px; border-radius: 50%; display: flex; align-items: center;
+    justify-content: center; flex-direction: column; position: relative;
+  }
+  .score-circle svg { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform: rotate(-90deg); }
+  .score-circle svg circle { fill: none; stroke-width: 6; stroke-linecap: round; }
+  .score-circle svg .bg-ring { stroke: rgba(255,255,255,0.06); }
+  .score-circle svg .progress-ring {
+    stroke: var(--orange); stroke-dasharray: 502; stroke-dashoffset: 231;
+    filter: drop-shadow(0 0 6px rgba(249,115,22,0.3)); transition: stroke-dashoffset 1.5s ease-out;
+  }
+  .score-number { font-family: 'Space Grotesk', sans-serif; font-size: 56px; font-weight: 700; line-height: 1; color: white; position: relative; z-index: 1; }
+  .score-grade { font-family: 'Space Grotesk', sans-serif; font-size: 14px; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; position: relative; z-index: 1; margin-top: 2px; }
+  .score-label { font-size: 13px; color: var(--text-secondary); font-weight: 500; position: relative; z-index: 1; margin-top: 4px; }
+  .score-details { flex: 1; }
+  .score-details h2 { font-family: 'Space Grotesk', sans-serif; font-size: 22px; font-weight: 600; margin-bottom: 8px; }
+  .score-details p { color: var(--text-secondary); font-size: 15px; line-height: 1.7; margin-bottom: 20px; }
+
+  .sub-scores { display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 12px; }
+  .sub-score { padding: 14px 16px; background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: var(--radius-sm); }
+  .sub-score-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); margin-bottom: 6px; }
+  .sub-score-value { font-family: 'Space Grotesk', sans-serif; font-size: 28px; font-weight: 700; }
+  .sub-score-bar { height: 3px; border-radius: 2px; background: rgba(255,255,255,0.06); margin-top: 8px; overflow: hidden; }
+  .sub-score-bar-fill { height: 100%; border-radius: 2px; transition: width 1s ease-out; }
+
+  .tabs {
+    position: sticky; top: 0; z-index: 100; background: rgba(10,10,15,0.85);
+    backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border); padding: 0;
+  }
+  .tabs-inner { max-width: 1200px; margin: 0 auto; padding: 0 24px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs-inner::-webkit-scrollbar { display: none; }
+  .tab-btn {
+    padding: 16px 24px; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;
+    color: var(--text-muted); background: none; border: none; border-bottom: 2px solid transparent;
+    cursor: pointer; white-space: nowrap; transition: all 0.2s; position: relative;
+  }
+  .tab-btn:hover { color: var(--text-secondary); }
+  .tab-btn.active { color: var(--text); border-bottom-color: var(--accent); }
+  .tab-btn .tab-count {
+    display: inline-flex; align-items: center; justify-content: center; min-width: 20px; height: 20px;
+    padding: 0 6px; background: var(--bg-card); border: 1px solid var(--border); border-radius: 100px;
+    font-size: 11px; font-weight: 600; margin-left: 8px; color: var(--text-secondary);
+  }
+  .tab-btn.active .tab-count { background: var(--accent); border-color: var(--accent); color: white; }
+
+  .tab-content { display: none; padding: 40px 0 80px; }
+  .tab-content.active { display: block; }
+
+  .section-title { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; margin-bottom: 8px; }
+  .section-subtitle { color: var(--text-secondary); font-size: 15px; margin-bottom: 24px; }
+
+  .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 40px; }
+  .stat-card { padding: 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); text-align: center; transition: border-color 0.2s; }
+  .stat-card:hover { border-color: var(--border-hover); }
+  .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 36px; font-weight: 700; color: white; margin-bottom: 4px; }
+  .stat-label { font-size: 13px; color: var(--text-secondary); }
+
+  .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 28px; margin-bottom: 16px; transition: border-color 0.2s; }
+  .card:hover { border-color: var(--border-hover); }
+  .card-title { font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; display: flex; align-items: center; gap: 12px; }
+
+  .badge { display: inline-flex; align-items: center; gap: 5px; padding: 4px 12px; border-radius: 100px; font-size: 12px; font-weight: 600; letter-spacing: 0.3px; }
+  .badge-critical { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+  .badge-high { background: var(--orange-bg); color: var(--orange); border: 1px solid var(--orange-border); }
+  .badge-medium { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+  .badge-low { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .badge-pass { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .badge-warning { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+  .badge-fail { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+
+  .finding { padding: 16px 0; border-bottom: 1px solid rgba(255,255,255,0.04); display: grid; grid-template-columns: auto 1fr auto; gap: 16px; align-items: start; }
+  .finding:last-child { border-bottom: none; }
+  .finding-status { width: 8px; height: 8px; border-radius: 50%; margin-top: 8px; }
+  .finding-status.pass { background: var(--green); box-shadow: 0 0 6px rgba(34,197,94,0.4); }
+  .finding-status.warning { background: var(--yellow); box-shadow: 0 0 6px rgba(234,179,8,0.4); }
+  .finding-status.fail { background: var(--red); box-shadow: 0 0 6px rgba(239,68,68,0.4); }
+  .finding-content h4 { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .finding-content p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+  .finding-rec {
+    margin-top: 8px; padding: 10px 14px; background: rgba(99,102,241,0.06); border-left: 3px solid var(--accent);
+    border-radius: 0 var(--radius-xs) var(--radius-xs) 0; font-size: 13px; color: var(--text); line-height: 1.5;
+  }
+
+  .collapsible { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm); margin-bottom: 12px; overflow: hidden; transition: border-color 0.2s; }
+  .collapsible:hover { border-color: var(--border-hover); }
+  .collapsible-header { padding: 20px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+  .collapsible-header:hover { background: rgba(255,255,255,0.02); }
+  .collapsible-title { font-weight: 600; color: var(--text); font-size: 14px; display: flex; align-items: center; gap: 12px; }
+  .collapsible-body { overflow: hidden; max-height: 0; transition: max-height 0.35s ease; }
+  .collapsible.open .collapsible-body { max-height: 5000px; }
+  .collapsible-body-inner { padding: 0 24px 24px; }
+  .collapse-icon {
+    width: 28px; height: 28px; border-radius: 50%; background: rgba(255,255,255,0.05); display: flex;
+    align-items: center; justify-content: center; font-size: 14px; color: var(--text-muted);
+    transition: transform 0.3s, background 0.2s; flex-shrink: 0;
+  }
+  .collapsible.open .collapse-icon { transform: rotate(180deg); }
+
+  .page-table { width: 100%; border-collapse: collapse; margin-top: 16px; }
+  .page-table th { text-align: left; padding: 12px 16px; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; color: var(--text-muted); border-bottom: 1px solid var(--border); font-weight: 600; }
+  .page-table td { padding: 12px 16px; font-size: 14px; border-bottom: 1px solid rgba(255,255,255,0.03); vertical-align: top; }
+  .page-table tr:hover td { background: rgba(255,255,255,0.02); }
+  .page-url { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--accent); word-break: break-all; }
+
+  .checklist-item { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.04); }
+  .checklist-item:last-child { border-bottom: none; }
+  .check-icon { width: 22px; height: 22px; border-radius: 6px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; margin-top: 1px; }
+  .check-icon.pass { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+  .check-icon.fail { background: var(--red-bg); color: var(--red); border: 1px solid var(--red-border); }
+  .check-icon.warn { background: var(--yellow-bg); color: var(--yellow); border: 1px solid var(--yellow-border); }
+  .check-text { font-size: 14px; color: var(--text); }
+  .check-text.muted { color: var(--text-secondary); }
+
+  .action-item {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-sm);
+    padding: 24px; margin-bottom: 12px; display: flex; gap: 20px; align-items: flex-start; transition: border-color 0.2s;
+  }
+  .action-item:hover { border-color: var(--border-hover); }
+  .action-number { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--accent); flex-shrink: 0; width: 36px; text-align: center; opacity: 0.5; }
+  .action-content { flex: 1; }
+  .action-title { font-weight: 600; color: var(--text); font-size: 15px; margin-bottom: 6px; }
+  .action-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.6; }
+  .action-impact { margin-top: 8px; font-size: 13px; color: var(--green); font-weight: 500; }
+
+  .cluster { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); padding: 24px; margin-bottom: 16px; }
+  .cluster-title { font-family: 'Space Grotesk', sans-serif; font-weight: 600; color: var(--purple); font-size: 16px; margin-bottom: 12px; }
+  .cluster-pages { display: flex; flex-wrap: wrap; gap: 8px; }
+  .cluster-page { padding: 6px 14px; border-radius: 100px; background: var(--purple-bg); border: 1px solid var(--purple-border); font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--text-secondary); }
+  .cluster-page.pillar { background: rgba(167,139,250,0.15); border-color: rgba(167,139,250,0.3); color: var(--purple); font-weight: 600; }
+
+  .lsi-cloud { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+  .lsi-tag { padding: 6px 14px; background: rgba(99,102,241,0.08); border: 1px solid rgba(99,102,241,0.2); border-radius: 100px; font-size: 13px; font-family: 'JetBrains Mono', monospace; color: var(--text); }
+  .lsi-tag.integrated { background: var(--green-bg); border-color: var(--green-border); color: var(--green); }
+  .lsi-tag.missing { background: var(--red-bg); border-color: var(--red-border); color: var(--red); opacity: 0.85; }
+
+  @media (max-width: 768px) {
+    .header h1 { font-size: 28px; }
+    .score-section { flex-direction: column; text-align: center; padding: 24px; gap: 24px; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .sub-scores { grid-template-columns: repeat(2, 1fr); }
+    .action-item { flex-direction: column; gap: 12px; }
+  }
+  @media print {
+    .tabs { display: none; }
+    .tab-content { display: block !important; page-break-before: always; }
+    body::before { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="container">
+    <div class="header-badge"><span class="dot"></span> Site-Wide SEO Audit</div>
+    <h1>tivipikoma.com</h1>
+    <p class="subtitle">Comprehensive analysis of 7 pages — Generated August 8, 2026</p>
+  </div>
+</div>
+
+<div class="container" style="padding-top: 0; padding-bottom: 32px;">
+  <div class="score-section">
+    <div class="score-circle-wrap">
+      <div class="score-circle">
+        <svg viewBox="0 0 160 160">
+          <circle class="bg-ring" cx="80" cy="80" r="74"/>
+          <circle class="progress-ring" cx="80" cy="80" r="74" style="stroke-dashoffset: 221;"/>
+        </svg>
+        <span class="score-number">56</span>
+        <span class="score-grade">D</span>
+        <span class="score-label">Overall Health</span>
+      </div>
+    </div>
+    <div class="score-details">
+      <h2>Solid brand and offer, but the site is nearly invisible in search — and gives away link equity it doesn't have to spare</h2>
+      <p>tivipikoma.com has real strengths for a small IPTV brand: Dutch-language copy, JSON-LD across every page, FAQ schema, a real H1 on every page including the homepage (via <code>motion.h1</code>), and per-page &lt;title&gt;/meta updates on 4 of 7 URLs. But three blog/list URLs never get a real canonical tag, Open Graph and Twitter Card data are frozen on the homepage's values site-wide, and — most urgently — a live search for "tvpikoma abonnement" surfaces nine near-identical copycat domains before tivipikoma.com shows up at all. Fix the on-page basics first; the brand-collision problem needs a decision from you (see Executive Summary).</p>
+      <div class="sub-scores">
+        <div class="sub-score">
+          <div class="sub-score-label">Technical</div>
+          <div class="sub-score-value" style="color: var(--yellow)">60</div>
+          <div class="sub-score-bar"><div class="sub-score-bar-fill" style="width:60%; background: var(--yellow)"></div></div>
+        </div>
+        <div class="sub-score">
+          <div class="sub-score-label">Content</div>
+          <div class="sub-score-value" style="color: var(--orange)">58</div>
+          <div class="sub-score-bar"><div class="sub-score-bar-fill" style="width:58%; background: var(--orange)"></div></div>
+        </div>
+        <div class="sub-score">
+          <div class="sub-score-label">Architecture</div>
+          <div class="sub-score-value" style="color: var(--orange)">58</div>
+          <div class="sub-score-bar"><div class="sub-score-bar-fill" style="width:58%; background: var(--orange)"></div></div>
+        </div>
+        <div class="sub-score">
+          <div class="sub-score-label">Cross-Page</div>
+          <div class="sub-score-value" style="color: var(--orange)">45</div>
+          <div class="sub-score-bar"><div class="sub-score-bar-fill" style="width:45%; background: var(--orange)"></div></div>
+        </div>
+        <div class="sub-score">
+          <div class="sub-score-label">Social &amp; Schema</div>
+          <div class="sub-score-value" style="color: var(--orange)">55</div>
+          <div class="sub-score-bar"><div class="sub-score-bar-fill" style="width:55%; background: var(--orange)"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="tabs">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="switchTab('executive')">Executive Summary</button>
+    <button class="tab-btn" onclick="switchTab('pages')">Page Breakdown <span class="tab-count">7</span></button>
+    <button class="tab-btn" onclick="switchTab('sitewide')">Site-Wide Issues <span class="tab-count">15</span></button>
+    <button class="tab-btn" onclick="switchTab('technical')">Technical</button>
+    <button class="tab-btn" onclick="switchTab('content')">Content Strategy</button>
+    <button class="tab-btn" onclick="switchTab('linking')">Internal Linking</button>
+    <button class="tab-btn" onclick="switchTab('actions')">Action Plan</button>
+  </div>
+</div>
+
+<!-- ==================== TAB 1: EXECUTIVE SUMMARY ==================== -->
+<div id="tab-executive" class="tab-content active">
+<div class="container">
+
+  <div class="section-title">Executive Summary</div>
+  <div class="section-subtitle">High-level overview of tivipikoma.com's SEO health and top priorities</div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-value">7</div><div class="stat-label">Pages Audited</div></div>
+    <div class="stat-card"><div class="stat-value">2</div><div class="stat-label">Critical Issues</div></div>
+    <div class="stat-card"><div class="stat-value">5</div><div class="stat-label">High Priority</div></div>
+    <div class="stat-card"><div class="stat-value">8</div><div class="stat-label">Warnings</div></div>
+    <div class="stat-card"><div class="stat-value">~570</div><div class="stat-label">Avg Word Count</div></div>
+    <div class="stat-card"><div class="stat-value">100%</div><div class="stat-label">Schema Present*</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom: 24px;">
+    <div class="card-title" style="margin-bottom: 16px;">Key Findings</div>
+    <div style="color: var(--text-secondary); font-size: 15px; line-height: 1.8;">
+      The single biggest problem isn't on the site at all: a live search for "tvpikoma abonnement" and for generic terms like "IPTV Nederland kopen" returns nine confusingly similar domains (tvpikoma.us, tvpikoma.one, tvpikoma.co, tvpikoma.me, tv-pikoma.shop, tv-pikoma.store, tvpikomatv.com, iptvpikoma.nl, and a Trustpilot page for a *different* tvpikoma.com) — but not tivipikoma.com. Whatever the relationship between these sites, your actual domain is not visible for its own brand name, which undercuts every other SEO effort on this list. On-site, the three /blog URLs never set a canonical tag via JavaScript, so they inherit the homepage's canonical and effectively tell Google they're duplicates of "/". Because tivipikoma.com is a pure client-side-rendered React SPA (react-router-dom + a catch-all rewrite in vercel.json) with no server-side rendering, every route ships the exact same static &lt;head&gt; — meaning Open Graph and Twitter Card tags never change per page, so sharing an /abonnementen or /blog link on WhatsApp (the business's primary channel) always previews the homepage. The FAQPage JSON-LD present on every page lists 6 Q&amp;As that don't match any of the 7 questions actually shown in the on-page FAQ component — a structured-data mismatch that risks losing the FAQ rich result entirely. Internally, /abonnementen, /reseller-pakket and /3maanden-Gratis each link to only one other page (the homepage logo), and neither blog post links to /abonnementen — the page a reader comparing IPTV providers should land on next.
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Top 3 Priorities</div>
+  <div class="section-subtitle">The highest-impact actions to take right now</div>
+
+  <div class="action-item">
+    <div class="action-number">1</div>
+    <div class="action-content">
+      <div class="action-title">Investigate the "tvpikoma" brand-name search collision</div>
+      <div class="action-desc">Searching "tvpikoma abonnement" and "IPTV Nederland kopen" returns tvpikoma.us, tvpikoma.one, tvpikoma.co, tvpikoma.me, tv-pikoma.shop, tv-pikoma.store, tvpikomatv.com and iptvpikoma.nl — but not tivipikoma.com. Determine whether these are copycats impersonating your brand (worth a trademark/DMCA review) or a naming coincidence you're on the losing side of. Either way, no amount of on-page SEO fixes this by itself.</div>
+      <div class="action-impact">Expected impact: this is likely suppressing 100% of your branded search traffic, the cheapest traffic a business like this can get.</div>
+    </div>
+    <span class="badge badge-critical">Critical</span>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number">2</div>
+    <div class="action-content">
+      <div class="action-title">Make Open Graph/Twitter tags update per page</div>
+      <div class="action-desc">Every page's &lt;head&gt; ships the homepage's static og:title/og:description/twitter:* values, because nothing in the codebase ever updates them client-side. Since this business runs primarily on WhatsApp sharing, every shared link — an abonnement, a blog post, the reseller page — currently previews as the homepage.</div>
+      <div class="action-impact">Expected impact: link previews on the business's main distribution channel finally match what's being shared.</div>
+    </div>
+    <span class="badge badge-high">High</span>
+  </div>
+
+  <div class="action-item">
+    <div class="action-number">3</div>
+    <div class="action-content">
+      <div class="action-title">Fix canonical tags on /blog and both blog posts</div>
+      <div class="action-desc">Abonnementen.tsx, ResellerPack.tsx, and DrieMandenGratis.tsx all set <code>link[rel=canonical]</code> in a useEffect — Blog.tsx never does, for either the list page or individual posts. All three blog URLs inherit whatever canonical was last set (the homepage's, by default), which reads to Google as "this page is a duplicate of tivipikoma.com/".</div>
+      <div class="action-impact">Expected impact: unblocks independent indexing of the blog content you've been actively publishing this month.</div>
+    </div>
+    <span class="badge badge-critical">Critical</span>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 2: PAGE-BY-PAGE BREAKDOWN ==================== -->
+<div id="tab-pages" class="tab-content">
+<div class="container">
+
+  <div class="section-title">Page-by-Page Breakdown</div>
+  <div class="section-subtitle">Individual audit results for each of the 7 URLs listed in sitemap.xml</div>
+
+  <div class="card" style="overflow-x: auto; padding: 0;">
+    <table class="page-table">
+      <thead>
+        <tr>
+          <th>Page</th><th>Title</th><th>Words (est.)</th><th>H1</th><th>Canonical</th><th>OG (accurate)</th><th>Schema</th><th>Issues</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><span class="page-url">/</span></td><td>tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen...</td><td>~550</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-warning">Warn</span></td><td>2</td></tr>
+        <tr><td><span class="page-url">/abonnementen</span></td><td>tvpikoma Abonnementen – Kies het beste IPTV pakket...</td><td>~400</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-warning">Warn</span></td><td>3</td></tr>
+        <tr><td><span class="page-url">/3maanden-Gratis</span></td><td>tvpikoma – 3 Maanden Gratis IPTV | Activeer Vandaag...</td><td>~450</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-warning">Warn</span></td><td>3</td></tr>
+        <tr><td><span class="page-url">/reseller-pakket</span></td><td>tvpikoma Reseller Pakketten – Word IPTV Reseller...</td><td>~800</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-warning">Warn</span></td><td>3</td></tr>
+        <tr><td><span class="page-url">/blog</span></td><td>Blog — IPTV nieuws, vergelijkingen &amp; advies...</td><td>~280</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-warning">Warn</span></td><td>4</td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-vs-swivtv</span></td><td>TVpikoma vs SwivTV — Beste IPTV Nordic vergelijking...</td><td>~750</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-fail">Fail</span></td><td>4</td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-kosten</span></td><td>Wat kost TVpikoma? Alle abonnementen op een rij...</td><td>~750</td><td><span class="badge badge-pass">Pass</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-fail">Fail</span></td><td><span class="badge badge-fail">Fail</span></td><td>4</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">Word counts are estimated from source (JSX/component text), not measured from rendered DOM — treat as directional. "Schema" reflects the 5 JSON-LD blocks shipped in the static index.html on every route regardless of page; see Technical tab for why this is marked Warn/Fail per page rather than a flat Pass.</p>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/</span> — Homepage <span class="badge badge-medium">2 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Title tag and meta description both exceed recommended length</h4>
+          <p>Title is ~71 characters ("tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K &amp; Onbeperkt Kijken"); meta description is ~192 characters. Google truncates titles past ~60 characters and descriptions past ~160.</p>
+          <div class="finding-rec">Trim the title to ~55-60 chars (e.g. "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen 4K") and the description to ~155 chars, keeping "tvpikoma" and "IPTV Nederland" near the front.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>FAQPage schema doesn't match the on-page FAQ content</h4>
+          <p>The static FAQPage JSON-LD in index.html lists 6 questions (e.g. "Wat kost een tvpikoma abonnement?"); the actual FAQ_DATA rendered by FAQ.tsx has 7 different questions with different wording. None of the 6 schema questions exactly match the 7 visible ones.</p>
+          <div class="finding-rec">Generate the FAQPage JSON-LD from FAQ_DATA directly (or vice versa) so schema and visible content are always identical — mismatches risk losing the FAQ rich result under Google's structured-data guidelines.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/abonnementen</span> <span class="badge badge-medium">3 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Open Graph and Twitter Card tags never update for this page</h4>
+          <p>Abonnementen.tsx's useEffect updates document.title, the meta description, and the canonical link — but nothing touches og:title, og:description, og:url or the twitter:* tags. Anyone sharing this URL on WhatsApp or Facebook sees the homepage's card ("tvpikoma | #1 IPTV Nederland...") instead of pricing-specific copy.</p>
+          <div class="finding-rec">Extend the existing per-page useEffect pattern to also set og:title, og:description, og:url, twitter:title and twitter:description.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Inherits the homepage's generic FAQPage/Service schema</h4>
+          <p>This page doesn't render its own FAQ section, yet the static FAQPage JSON-LD (6 Q&amp;As about the brand generally) is still present in the HTML shell served for this route.</p>
+          <div class="finding-rec">Either add page-specific structured data (e.g. Product/Offer schema matching the visible pricing cards) or accept that generic schema here isn't actively harmful, just not additive.</div>
+        </div>
+        <span class="badge badge-low">Low</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Dead-end page — only outgoing internal link is back to the homepage logo</h4>
+          <p>No link to /reseller-pakket, /3maanden-Gratis, or /blog from this page, despite it being the primary conversion page users are most likely to compare packages from.</p>
+          <div class="finding-rec">Add a small cross-sell block linking to the reseller program and the 3-months-free promo.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/3maanden-Gratis</span> <span class="badge badge-medium">3 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Open Graph/Twitter tags never update (same pattern as /abonnementen)</h4>
+          <p>DrieMandenGratis.tsx updates title, description and canonical but not og:* or twitter:* tags.</p>
+          <div class="finding-rec">Same fix as /abonnementen — extend the useEffect to cover social tags.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>URL slug breaks the site's naming convention</h4>
+          <p>Every other route is lowercase-hyphenated (/abonnementen, /reseller-pakket, /blog), but this one is /3maanden-Gratis — mixed case, no hyphen before "Gratis". URLs are case-sensitive; this invites accidental duplicate-URL variants and looks inconsistent in the address bar and search results.</p>
+          <div class="finding-rec">Add a route + redirect for /3-maanden-gratis (or similar all-lowercase, hyphenated slug) and 301 the old path to it; update the sitemap and internal links to match.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Dead-end page, same as /abonnementen</h4>
+          <p>Only links back to "/" via the logo.</p>
+          <div class="finding-rec">Link to /abonnementen for readers who want a longer-term plan than the promo.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/reseller-pakket</span> <span class="badge badge-medium">3 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Open Graph/Twitter tags never update (same pattern as other JS-managed pages)</h4>
+          <p>ResellerPack.tsx follows the same title/description/canonical-only pattern.</p>
+          <div class="finding-rec">Same fix — extend to og:* and twitter:* tags.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Page has its own visible FAQ ("Veelgestelde Vragen") that also doesn't match the static FAQPage schema</h4>
+          <p>This is a second, different FAQ section from the homepage's — meaning the one static FAQPage JSON-LD served on every route mismatches the visible FAQ content on two separate pages, not just one.</p>
+          <div class="finding-rec">Give this page its own FAQPage JSON-LD generated from its actual reseller-specific questions.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Dead-end page, same pattern as /abonnementen and /3maanden-Gratis</h4>
+          <p>Only outgoing link is the homepage logo.</p>
+          <div class="finding-rec">Link back to /abonnementen for resellers who also want a personal-use subscription.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/blog</span> <span class="badge badge-high">4 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Canonical tag never set</h4>
+          <p>Blog.tsx's useEffect for the list view (BlogList) updates document.title and the meta description only — no <code>querySelector('link[rel="canonical"]')</code> call anywhere in the file.</p>
+          <div class="finding-rec">Add canonical-setting to both the BlogList and BlogPostPage effects, matching the pattern already used in Abonnementen.tsx.</div>
+        </div>
+        <span class="badge badge-critical">Critical</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Open Graph/Twitter tags never update</h4>
+          <p>Same gap as the other JS-managed pages, compounded here since this is the page most likely to be shared externally.</p>
+          <div class="finding-rec">Extend the effect to og:*/twitter:* tags.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>Thin content — mostly post excerpts</h4>
+          <p>At ~280 words (2 post cards plus intro copy), this is the thinnest of the 7 audited pages.</p>
+          <div class="finding-rec">Content depth will grow naturally as more posts are published; not urgent while the blog only has 2 entries.</div>
+        </div>
+        <span class="badge badge-low">Low</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>No link to /abonnementen</h4>
+          <p>The blog's purpose (comparison and pricing content) points directly at a purchase decision, but there's no link from the list page to the page where that purchase happens.</p>
+          <div class="finding-rec">Add a "Bekijk onze abonnementen" CTA to the blog list page.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/blog/tvpikoma-vs-swivtv</span> <span class="badge badge-high">4 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Canonical tag never set</h4>
+          <p>BlogPostPage's useEffect sets document.title and meta description from post.metaTitle/metaDescription but never touches canonical.</p>
+          <div class="finding-rec">Set canonical to https://tivipikoma.com/blog/tvpikoma-vs-swivtv on mount.</div>
+        </div>
+        <span class="badge badge-critical">Critical</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>Open Graph/Twitter tags never update — worst case of this issue on the site</h4>
+          <p>This is a comparison article explicitly designed to be shared and referenced; when shared on WhatsApp or social, it will show the generic homepage card, not the article title/description.</p>
+          <div class="finding-rec">Highest-priority page to fix for the og:*/twitter:* gap, given its comparison/link-bait intent.</div>
+        </div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content">
+          <h4>No Article/BlogPosting structured data</h4>
+          <p>Only the static, page-agnostic Organization/WebSite/Service/FAQPage/BreadcrumbList schema is present — nothing describes this URL as an article with a headline, author, or datePublished.</p>
+          <div class="finding-rec">Add BlogPosting JSON-LD (headline, datePublished, author, image) client-side alongside the title/meta update.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content">
+          <h4>No internal link to /abonnementen</h4>
+          <p>A reader convinced by this comparison has no direct path to the pricing page from the article body.</p>
+          <div class="finding-rec">Add a contextual link/CTA to /abonnementen where the article discusses tvpikoma's plans.</div>
+        </div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+    </div></div>
+  </div>
+
+  <div class="collapsible">
+    <div class="collapsible-header" onclick="this.parentElement.classList.toggle('open')">
+      <span class="collapsible-title"><span class="page-url">/blog/tvpikoma-kosten</span> <span class="badge badge-high">4 issues</span></span>
+      <span class="collapse-icon">&#9660;</span>
+    </div>
+    <div class="collapsible-body"><div class="collapsible-body-inner">
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content"><h4>Canonical tag never set</h4><p>Same root cause as the other blog post — shared BlogPostPage component, shared bug.</p><div class="finding-rec">Fixing BlogPostPage.tsx once resolves this for both current and all future posts.</div></div>
+        <span class="badge badge-critical">Critical</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content"><h4>Open Graph/Twitter tags never update</h4><p>Same shared-component root cause.</p><div class="finding-rec">Same fix as the other blog post.</div></div>
+        <span class="badge badge-high">High</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status fail"></div>
+        <div class="finding-content"><h4>No Article/BlogPosting structured data</h4><p>This is arguably the highest-value post to mark up — "wat kost tvpikoma" is a high-intent, near-transactional query.</p><div class="finding-rec">Prioritize BlogPosting schema here first if rolling the fix out incrementally.</div></div>
+        <span class="badge badge-medium">Medium</span>
+      </div>
+      <div class="finding">
+        <div class="finding-status warning"></div>
+        <div class="finding-content"><h4>No internal link to /abonnementen</h4><p>A pricing-intent article that never links to the pricing page is the clearest missed conversion path on the whole site.</p><div class="finding-rec">Add a direct CTA/link to /abonnementen — this is the single highest-leverage internal link to add.</div></div>
+        <span class="badge badge-high">High</span>
+      </div>
+    </div></div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 3: SITE-WIDE ISSUES ==================== -->
+<div id="tab-sitewide" class="tab-content">
+<div class="container">
+
+  <div class="section-title">Site-Wide Issues</div>
+  <div class="section-subtitle">Cross-cutting concerns that affect multiple pages</div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom: 16px;">Brand &amp; Competitive Visibility</div>
+    <div class="finding">
+      <div class="finding-status fail"></div>
+      <div class="finding-content">
+        <h4>tivipikoma.com does not appear for its own brand-adjacent searches</h4>
+        <p>Live searches for "tvpikoma abonnement" and "IPTV Nederland kopen 4K kanalen" returned tvpikoma.us, tvpikoma.one, tvpikoma.co, tvpikoma.me, tv-pikoma.shop, tv-pikoma.store, tvpikomatv.com, iptvpikoma.nl, and a Trustpilot page for tvpikoma.com (a different domain from tivipikoma.com) — with no tivipikoma.com result in the set returned. Whether these are impersonators or unrelated coincidentally-named competitors, they are winning the exact search terms this business needs.</p>
+        <div class="finding-rec">Decide deliberately: (a) if these are brand impersonators, consider a trademark/UDRP or platform-abuse complaint; (b) either way, lean harder on the "tivipikoma.com" and "tvpikoma.com" spelling distinction in ad copy, social bios and WhatsApp messaging so customers can verify they're on the right domain; (c) treat Google Ads/paid brand search as a stopgap while organic brand visibility is contested.</div>
+      </div>
+      <span class="badge badge-critical">Critical</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom: 16px;">Duplicate Content &amp; Structured Data Consistency</div>
+    <div class="finding">
+      <div class="finding-status warning"></div>
+      <div class="finding-content">
+        <h4>One static JSON-LD payload is served identically on all 7 routes</h4>
+        <p>Because the site is a client-rendered SPA with a catch-all rewrite, the Organization, WebSite, Service, FAQPage and BreadcrumbList JSON-LD blocks in index.html are shipped byte-for-byte on every route before React mounts. The FAQPage block mismatches the visible FAQ on two different pages (home and /reseller-pakket, each with different real FAQ content).</p>
+        <div class="finding-rec">Move schema injection into a per-page effect (or use a small head-management utility) so each route ships schema that matches what's actually visible on it.</div>
+      </div>
+      <span class="badge badge-high">High</span>
+    </div>
+    <div class="finding">
+      <div class="finding-status pass"></div>
+      <div class="finding-content">
+        <h4>Fixed — BreadcrumbList schema is now per-page</h4>
+        <p>Each page sets its own breadcrumb trail via <code>setBreadcrumbSchema()</code> in src/lib/pageMeta.ts (e.g. Home → Blog → post title on a blog post) and resets to a Home-only default on unmount.</p>
+      </div>
+      <span class="badge badge-pass">Fixed</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom: 16px;">Robots.txt &amp; Sitemap</div>
+    <div class="finding">
+      <div class="finding-status pass"></div>
+      <div class="finding-content">
+        <h4>robots.txt is valid and unrestrictive</h4>
+        <p><code>User-agent: * / Allow: / / Sitemap: https://tivipikoma.com/sitemap.xml</code> — confirmed live, no blocked paths.</p>
+      </div>
+      <span class="badge badge-pass">Pass</span>
+    </div>
+    <div class="finding">
+      <div class="finding-status warning"></div>
+      <div class="finding-content">
+        <h4>sitemap.xml lastmod dates are inconsistent</h4>
+        <p>/, /abonnementen and /3maanden-Gratis all show <code>2025-06-20</code> (over a year old) while /reseller-pakket, /blog and both blog posts show <code>2026-08-07</code> (today, effectively). If the homepage/abonnementen content has changed since June 2025 — and the presence of dynamic pricing and the WhatsApp Edge Config integration suggests it has — the stale dates undersell freshness to crawlers.</p>
+        <div class="finding-rec">Update lastmod whenever a page's content meaningfully changes, or automate it from git/deploy metadata at build time.</div>
+      </div>
+      <span class="badge badge-medium">Medium</span>
+    </div>
+    <div class="finding">
+      <div class="finding-status pass"></div>
+      <div class="finding-content">
+        <h4>All 7 sitemap URLs match live, resolvable routes</h4>
+        <p>No 404s or mismatches found between sitemap.xml and the React Router route table in App.tsx.</p>
+      </div>
+      <span class="badge badge-pass">Pass</span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom: 16px;">Security &amp; Server Headers</div>
+    <div class="finding">
+      <div class="finding-status pass"></div>
+      <div class="finding-content"><h4>HTTPS enforced</h4><p>All pages served over HTTPS via Vercel.</p></div>
+      <span class="badge badge-pass">Pass</span>
+    </div>
+    <div class="finding">
+      <div class="finding-status pass"></div>
+      <div class="finding-content">
+        <h4>Fixed — baseline security headers added</h4>
+        <p>vercel.json now sets Strict-Transport-Security, X-Content-Type-Options, X-Frame-Options and Referrer-Policy. CSP was deliberately left out — writing one that allows gtag.js, Google Fonts and WhatsApp links without live testing risks silently breaking the site, and this needs a browser-verified rollout rather than a blind addition.</p>
+      </div>
+      <span class="badge badge-pass">Fixed</span>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 4: TECHNICAL ==================== -->
+<div id="tab-technical" class="tab-content">
+<div class="container">
+
+  <div class="section-title">Technical SEO</div>
+  <div class="section-subtitle">Infrastructure, rendering, and implementation checks</div>
+
+  <div class="card">
+    <div class="card-title" style="margin-bottom: 20px;">Implementation Checklist</div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">HTTPS enabled site-wide</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Viewport meta tag present (mobile-friendly declaration)</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">robots.txt valid, references sitemap, no blocked paths</div></div>
+    <div class="checklist-item"><div class="check-icon warn">!</div><div class="check-text muted">sitemap.xml valid but has stale/inconsistent lastmod dates</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text muted">No server-side rendering or prerendering — pure client-rendered SPA (Vite + react-router-dom + catch-all rewrite)</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text muted">Canonical tags missing on 3 of 7 routes (/blog and both blog posts)</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text muted">Open Graph / Twitter Card tags identical (static) across all 7 routes</div></div>
+    <div class="checklist-item"><div class="check-icon warn">!</div><div class="check-text muted">JSON-LD schema present on every route but not page-specific; FAQPage mismatches visible content on 2 pages</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">All 7 pages have exactly one H1 (homepage's renders via <code>motion.h1</code>, which outputs a real &lt;h1&gt; element — easy to miss in a plain-text search, confirmed by checking the compiled DOM output)</div></div>
+    <div class="checklist-item"><div class="check-icon warn">!</div><div class="check-text muted">No explicit security headers (HSTS/CSP/etc.) configured in vercel.json</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Font loading uses preconnect (fonts.googleapis.com, fonts.gstatic.com)</div></div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Client-Side Rendering — Why This Matters Here</div>
+  <div class="section-subtitle">What a non-JS-executing request actually sees</div>
+  <div class="card">
+    <div class="finding">
+      <div class="finding-status warning"></div>
+      <div class="finding-content">
+        <h4>Fetching any of the 7 URLs directly returns only the static &lt;div id="root"&gt;&lt;/div&gt; shell</h4>
+        <p>Confirmed on live pages: the raw HTML response for "/", "/abonnementen" and both blog posts contains only the static head (one shared title/meta/schema block) and an empty root div — all visible content, headings, and page-specific text is injected by React after the bundle loads. Modern Google web-rendering does execute JavaScript before indexing, so this alone won't stop the site from being indexed — but it does mean: (1) any tool, crawler, or social-media link-unfurler that doesn't execute JS sees the homepage's generic metadata regardless of URL, and (2) rendering happens on a delayed "second wave" in Google's pipeline, so fresh content (like the two blog posts published this week) can take longer to be fully evaluated than on a server-rendered or statically-generated site.</p>
+        <div class="finding-rec">Not necessarily worth a framework migration for a 7-page site — but it raises the cost of every other JS-only fix on this list (canonical, OG tags, schema), since none of it is visible to anything that doesn't render JS. If organic growth becomes a bigger priority, consider prerendering (e.g. vite-plugin-ssr, or a static prerender step for the 7 known routes) so each URL ships its own real HTML.</div>
+      </div>
+      <span class="badge badge-high">High</span>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Schema Markup Strategy</div>
+  <div class="section-subtitle">Current structured data and recommended additions, per page</div>
+  <div class="card" style="overflow-x: auto; padding: 0;">
+    <table class="page-table">
+      <thead><tr><th>Page</th><th>Current Schema (as served)</th><th>Matches Visible Content?</th><th>Recommended Addition</th></tr></thead>
+      <tbody>
+        <tr><td><span class="page-url">/</span></td><td>Organization, WebSite, Service+Offers, FAQPage, BreadcrumbList</td><td><span class="badge badge-warning">FAQ mismatch</span></td><td>Regenerate FAQPage from FAQ.tsx's actual FAQ_DATA</td></tr>
+        <tr><td><span class="page-url">/abonnementen</span></td><td>Same static block (inherited)</td><td><span class="badge badge-warning">Generic</span></td><td>Product/Offer schema for the visible pricing tiers</td></tr>
+        <tr><td><span class="page-url">/3maanden-Gratis</span></td><td>Same static block (inherited)</td><td><span class="badge badge-warning">Generic</span></td><td>Offer schema for the promo terms</td></tr>
+        <tr><td><span class="page-url">/reseller-pakket</span></td><td>Same static block (inherited)</td><td><span class="badge badge-fail">FAQ mismatch</span></td><td>Page-specific FAQPage from its own visible FAQ; Product schema for credit packages</td></tr>
+        <tr><td><span class="page-url">/blog</span></td><td>Same static block (inherited)</td><td><span class="badge badge-warning">Generic</span></td><td>CollectionPage or Blog schema listing the 2 posts</td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-vs-swivtv</span></td><td>Same static block (inherited)</td><td><span class="badge badge-fail">No article schema</span></td><td>BlogPosting (headline, datePublished, author, image)</td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-kosten</span></td><td>Same static block (inherited)</td><td><span class="badge badge-fail">No article schema</span></td><td>BlogPosting (headline, datePublished, author, image) — highest priority, transactional-intent post</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Performance Indicators</div>
+  <div class="section-subtitle">Resource loading patterns observed in source</div>
+  <div class="finding">
+    <div class="finding-status warning"></div>
+    <div class="finding-content">
+      <h4>Two separate Google Ads gtag.js loaders in &lt;head&gt;</h4>
+      <p>index.html loads two distinct gtag.js scripts (AW-18248577419 and AW-18216148215) before any other head content, each with its own inline dataLayer push. Both are marked async so they don't block parsing, but it's two full script fetches for what could be one gtag config with two conversion IDs.</p>
+      <div class="finding-rec">Not an SEO blocker; worth consolidating into a single gtag('config', ...) call per ID using one script load if simplifying the head is ever prioritized.</div>
+    </div>
+    <span class="badge badge-low">Low</span>
+  </div>
+  <div class="finding">
+    <div class="finding-status pass"></div>
+    <div class="finding-content">
+      <h4>Font loading uses preconnect correctly</h4>
+      <p>rel="preconnect" is set for both fonts.googleapis.com and fonts.gstatic.com (with crossorigin on the latter), which is the right pattern for third-party font hosts.</p>
+    </div>
+    <span class="badge badge-pass">Pass</span>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 5: CONTENT STRATEGY ==================== -->
+<div id="tab-content" class="tab-content">
+<div class="container">
+
+  <div class="section-title">Content Strategy</div>
+  <div class="section-subtitle">Content gaps, keyword opportunities, and recommended structure — built around your stated goal of ranking higher for IPTV/abonnement terms</div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-value">1</div><div class="stat-label">Thin Content Pages (&lt;300w)</div></div>
+    <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Strong Content Pages (700w+)</div></div>
+    <div class="stat-card"><div class="stat-value">~3,980</div><div class="stat-label">Total Word Count (est.)</div></div>
+    <div class="stat-card"><div class="stat-value">~4,800</div><div class="stat-label">Top Competitor's Single-Page Word Count</div></div>
+  </div>
+
+  <div class="card" style="margin-bottom: 24px;">
+    <div class="card-title" style="margin-bottom: 12px;">Reality check against competitors</div>
+    <p style="font-size: 14px; color: var(--text-secondary); line-height: 1.7;">deiptv.nl — one of the pages actually ranking for "IPTV Nederland kopen" — runs a single ~4,500-5,000 word homepage covering "Wat is IPTV &amp; Hoe Werkt Het", a full buying guide, device compatibility, an extensive FAQ, and visible trust indicators (review count, years in business, uptime %). tivipikoma.com's entire site totals an estimated ~3,980 words across all 7 pages combined, and none of it is a dedicated "what is IPTV / how does it work" explainer — the closest thing is the 4-step SetupWizard component, which is UI-driven rather than crawlable prose. This is a legitimate content-depth gap, not a technical one.</p>
+  </div>
+
+  <div class="section-title" style="font-size: 18px;">Inferred Keyword Map</div>
+  <div class="section-subtitle">Target keyword per page, based on your stated primary keyword "tvpikoma" plus IPTV/abonnement intent</div>
+  <div class="card" style="overflow-x: auto; padding: 0;">
+    <table class="page-table">
+      <thead><tr><th>Page</th><th>Inferred Target Keyword</th><th>Title Includes KW</th><th>H1 Includes KW</th><th>Cannibalization Risk</th></tr></thead>
+      <tbody>
+        <tr><td><span class="page-url">/</span></td><td>tvpikoma / IPTV Nederland</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-fail">No H1</span></td><td><span class="badge badge-pass">Low</span></td></tr>
+        <tr><td><span class="page-url">/abonnementen</span></td><td>tvpikoma abonnement / IPTV abonnement</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-warning">Medium — overlaps with /3maanden-Gratis and blog/tvpikoma-kosten</span></td></tr>
+        <tr><td><span class="page-url">/3maanden-Gratis</span></td><td>tvpikoma 3 maanden gratis / IPTV gratis proberen</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-warning">Medium — pricing overlap with /abonnementen</span></td></tr>
+        <tr><td><span class="page-url">/reseller-pakket</span></td><td>IPTV reseller worden</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Low — distinct intent</span></td></tr>
+        <tr><td><span class="page-url">/blog</span></td><td>IPTV nieuws / vergelijkingen</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Low</span></td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-vs-swivtv</span></td><td>tvpikoma vs swivtv</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Low</span></td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-kosten</span></td><td>tvpikoma kosten / wat kost tvpikoma</td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-pass">Yes</span></td><td><span class="badge badge-warning">Medium — overlaps with /abonnementen's pricing focus</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="font-size: 12px; color: var(--text-muted); margin-top: 8px;">The pricing overlap between /abonnementen, /3maanden-Gratis and /blog/tvpikoma-kosten isn't harmful cannibalization today (they're not competing for identical exact-match terms) — but it's exactly why the missing internal links between them matter: without cross-links, Google has to work out the relationship between these pages on its own instead of being told directly.</p>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">LSI / Semantic Keyword Coverage</div>
+  <div class="section-subtitle">Terms competitors and "people also ask" results use repeatedly for IPTV Nederland — green = present on your site, red = missing</div>
+  <div class="lsi-cloud">
+    <span class="lsi-tag integrated">80.000+ kanalen</span>
+    <span class="lsi-tag integrated">4K/8K kwaliteit</span>
+    <span class="lsi-tag integrated">geen contract</span>
+    <span class="lsi-tag integrated">Smart TV</span>
+    <span class="lsi-tag integrated">Fire TV Stick</span>
+    <span class="lsi-tag integrated">Android box</span>
+    <span class="lsi-tag integrated">iDEAL</span>
+    <span class="lsi-tag integrated">Bancontact</span>
+    <span class="lsi-tag integrated">PayPal</span>
+    <span class="lsi-tag integrated">24/7 support</span>
+    <span class="lsi-tag integrated">WhatsApp bestellen</span>
+    <span class="lsi-tag integrated">Eredivisie</span>
+    <span class="lsi-tag integrated">ESPN</span>
+    <span class="lsi-tag integrated">Viaplay</span>
+    <span class="lsi-tag integrated">Formule 1</span>
+    <span class="lsi-tag missing">wat is IPTV / hoe werkt het</span>
+    <span class="lsi-tag missing">geld-terug-garantie</span>
+    <span class="lsi-tag missing">gratis trial / proefperiode</span>
+    <span class="lsi-tag missing">EPG / TV-gids</span>
+    <span class="lsi-tag missing">catch-up TV / uitzending gemist</span>
+    <span class="lsi-tag missing">IPTV Smarters Pro</span>
+    <span class="lsi-tag missing">TiviMate</span>
+    <span class="lsi-tag missing">jaren ervaring / opgericht</span>
+    <span class="lsi-tag missing">uptime / stabiliteit cijfers</span>
+    <span class="lsi-tag missing">IPTV kopen stappenplan</span>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Recommended Content Clusters</div>
+  <div class="section-subtitle">Group related pages into pillar/cluster structure — mostly a linking exercise, since the pages already exist</div>
+  <div class="cluster">
+    <div class="cluster-title">Abonnementen &amp; Pricing</div>
+    <div class="cluster-pages">
+      <span class="cluster-page pillar">/abonnementen (Pillar)</span>
+      <span class="cluster-page">/3maanden-Gratis</span>
+      <span class="cluster-page">/blog/tvpikoma-kosten</span>
+    </div>
+  </div>
+  <div class="cluster">
+    <div class="cluster-title">Reseller / B2B</div>
+    <div class="cluster-pages">
+      <span class="cluster-page pillar">/reseller-pakket (Pillar)</span>
+    </div>
+    <p style="font-size: 13px; color: var(--text-secondary); margin-top: 10px;">No supporting content exists yet — this cluster is a single, unlinked page.</p>
+  </div>
+  <div class="cluster">
+    <div class="cluster-title">Editorial / Comparison</div>
+    <div class="cluster-pages">
+      <span class="cluster-page pillar">/blog (Pillar)</span>
+      <span class="cluster-page">/blog/tvpikoma-vs-swivtv</span>
+      <span class="cluster-page">/blog/tvpikoma-kosten</span>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Content Gap Recommendations</div>
+  <div class="section-subtitle">Suggested new content, prioritized by how directly it supports your stated ranking goal</div>
+  <div class="action-item">
+    <div class="action-number">1</div>
+    <div class="action-content">
+      <div class="action-title">"Wat is IPTV en hoe werkt het?" explainer</div>
+      <div class="action-desc">Every ranking competitor found in research (deiptv.nl and others) has a dedicated informational section or page answering this. tivipikoma.com has no equivalent — the SetupWizard component covers installation UI but not the underlying explainer content that captures top-of-funnel searches.</div>
+    </div>
+    <span class="badge badge-high">High</span>
+  </div>
+  <div class="action-item">
+    <div class="action-number">2</div>
+    <div class="action-content">
+      <div class="action-title">Device-specific installation guides</div>
+      <div class="action-desc">Turn the 4-step SetupWizard content into full articles for "tvpikoma installeren Firestick", "tvpikoma Smart TV instellen", etc. — long-tail, low-competition, high-intent terms that convert directly.</div>
+    </div>
+    <span class="badge badge-medium">Medium</span>
+  </div>
+  <div class="action-item">
+    <div class="action-number">3</div>
+    <div class="action-content">
+      <div class="action-title">Brand-disambiguation content</div>
+      <div class="action-desc">Given the "tvpikoma" naming collision found in Site-Wide Issues, consider a short page or FAQ entry clarifying tivipikoma.com's identity (official domain, contact channel, Trustpilot/reviews if any belong to this specific business) — this also gives you a page to point paid brand-search traffic to.</div>
+    </div>
+    <span class="badge badge-medium">Medium</span>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 6: INTERNAL LINKING ==================== -->
+<div id="tab-linking" class="tab-content">
+<div class="container">
+
+  <div class="section-title">Internal Linking Analysis</div>
+  <div class="section-subtitle">Link equity distribution across the 7 audited pages</div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-value">14</div><div class="stat-label">Total Internal Links</div></div>
+    <div class="stat-card"><div class="stat-value">0</div><div class="stat-label">Orphan Pages</div></div>
+    <div class="stat-card"><div class="stat-value">3</div><div class="stat-label">Dead-End Pages</div></div>
+    <div class="stat-card"><div class="stat-value">2.0</div><div class="stat-label">Avg Links/Page</div></div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px;">Link Equity Distribution</div>
+  <div class="section-subtitle">Counting only links between the 7 audited pages (Header renders on the homepage only; each sub-page has its own minimal header)</div>
+  <div class="card" style="overflow-x: auto; padding: 0;">
+    <table class="page-table">
+      <thead><tr><th>Page</th><th>Incoming Internal Links</th><th>Outgoing Internal Links</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td><span class="page-url">/</span></td><td>6</td><td>4</td><td><span class="badge badge-pass">Healthy</span></td></tr>
+        <tr><td><span class="page-url">/abonnementen</span></td><td>1</td><td>1</td><td><span class="badge badge-warning">Dead-end</span></td></tr>
+        <tr><td><span class="page-url">/3maanden-Gratis</span></td><td>1</td><td>1</td><td><span class="badge badge-warning">Dead-end</span></td></tr>
+        <tr><td><span class="page-url">/reseller-pakket</span></td><td>1</td><td>1</td><td><span class="badge badge-warning">Dead-end</span></td></tr>
+        <tr><td><span class="page-url">/blog</span></td><td>3</td><td>3</td><td><span class="badge badge-pass">Healthy</span></td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-vs-swivtv</span></td><td>1</td><td>2</td><td><span class="badge badge-warning">Weak inbound</span></td></tr>
+        <tr><td><span class="page-url">/blog/tvpikoma-kosten</span></td><td>1</td><td>2</td><td><span class="badge badge-warning">Weak inbound</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Orphan Pages</div>
+  <div class="section-subtitle">None — every audited page receives at least one internal link, thanks to the homepage's Header component linking to all four main sections.</div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Dead-End Pages</div>
+  <div class="section-subtitle">Pages whose only outgoing internal link is the homepage logo — no forward path for the visitor or for crawl equity</div>
+  <div class="finding">
+    <div class="finding-status warning"></div>
+    <div class="finding-content">
+      <h4>/abonnementen, /3maanden-Gratis, and /reseller-pakket each use a minimal custom &lt;header&gt; with only a logo link to "/"</h4>
+      <p>Unlike the homepage (which renders the full Header component with links to all 4 main sections), these three pages define their own lightweight header inline — same visual pattern, same single link. None of them link to each other despite being closely related purchase-decision pages.</p>
+      <div class="finding-rec">Add a small "verder lezen" / cross-sell strip to each of these three pages linking to the other two, plus /blog where relevant.</div>
+    </div>
+    <span class="badge badge-medium">Medium</span>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Suggested Internal Links</div>
+  <div class="section-subtitle">Specific, ready-to-implement linking opportunities</div>
+  <div class="action-item">
+    <div class="action-number">1</div>
+    <div class="action-content">
+      <div class="action-title">Link from /blog/tvpikoma-kosten to /abonnementen</div>
+      <div class="action-desc">A pricing-focused article ("Wat kost TVpikoma?") that never links to the actual pricing/purchase page is the clearest missed conversion path on the site — and the easiest to fix, since Blog.tsx already has access to react-router-dom's Link component.</div>
+    </div>
+    <span class="badge badge-high">High</span>
+  </div>
+  <div class="action-item">
+    <div class="action-number">2</div>
+    <div class="action-content">
+      <div class="action-title">Link from /blog/tvpikoma-vs-swivtv to /abonnementen</div>
+      <div class="action-desc">Same rationale — a comparison article is a natural next-click into pricing.</div>
+    </div>
+    <span class="badge badge-medium">Medium</span>
+  </div>
+  <div class="action-item">
+    <div class="action-number">3</div>
+    <div class="action-content">
+      <div class="action-title">Cross-link /abonnementen ↔ /3maanden-Gratis ↔ /reseller-pakket</div>
+      <div class="action-desc">These three "money pages" currently share zero links between them. A visitor comparing options, or a reseller who also wants personal use, has to go back through the homepage to move between them.</div>
+    </div>
+    <span class="badge badge-medium">Medium</span>
+  </div>
+
+</div>
+</div>
+
+<!-- ==================== TAB 7: ACTION PLAN ==================== -->
+<div id="tab-actions" class="tab-content">
+<div class="container">
+
+  <div class="section-title">Prioritized Action Plan</div>
+  <div class="section-subtitle">Every recommendation ranked by impact, grouped by effort level</div>
+
+  <div class="section-title" style="font-size: 18px; color: var(--green);">Quick Wins <span style="font-size: 14px; color: var(--text-muted); font-weight: 400;">&mdash; less than 1 hour each</span></div>
+  <div style="margin-bottom: 24px;">
+    <div class="action-item">
+      <div class="action-number">1</div>
+      <div class="action-content">
+        <div class="action-title">Trim the homepage title tag and meta description to length</div>
+        <div class="action-desc">Title to ~55-60 chars, description to ~150-155 chars, in index.html.</div>
+        <div class="action-impact">Stops SERP truncation.</div>
+      </div>
+      <span class="badge badge-medium">Medium</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">3</div>
+      <div class="action-content">
+        <div class="action-title">Add canonical-setting to Blog.tsx's two useEffect hooks</div>
+        <div class="action-desc">Copy the one-line pattern already used in Abonnementen.tsx/ResellerPack.tsx/DrieMandenGratis.tsx into BlogList and BlogPostPage.</div>
+        <div class="action-impact">Unblocks independent indexing of /blog and both posts.</div>
+      </div>
+      <span class="badge badge-critical">Critical</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">4</div>
+      <div class="action-content">
+        <div class="action-title">Add a link from /blog/tvpikoma-kosten and /blog/tvpikoma-vs-swivtv to /abonnementen</div>
+        <div class="action-desc">Two Link components in the article body/CTA.</div>
+        <div class="action-impact">Closes the clearest content-to-conversion gap on the site.</div>
+      </div>
+      <span class="badge badge-high">High</span>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; color: var(--orange);">High Impact <span style="font-size: 14px; color: var(--text-muted); font-weight: 400;">&mdash; 1-4 hours each</span></div>
+  <div style="margin-bottom: 24px;">
+    <div class="action-item">
+      <div class="action-number">1</div>
+      <div class="action-content">
+        <div class="action-title">Extend every page's title/meta useEffect to also update Open Graph and Twitter Card tags</div>
+        <div class="action-desc">Applies to Abonnementen.tsx, ResellerPack.tsx, DrieMandenGratis.tsx, and both views in Blog.tsx — five spots, same pattern each time (og:title, og:description, og:url, twitter:title, twitter:description).</div>
+        <div class="action-impact">Every WhatsApp/social share starts showing the actual page instead of the homepage.</div>
+      </div>
+      <span class="badge badge-high">High</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">2</div>
+      <div class="action-content">
+        <div class="action-title">Regenerate the FAQPage JSON-LD from the real FAQ_DATA content</div>
+        <div class="action-desc">Either build the JSON-LD from FAQ_DATA at build time, or update FAQ_DATA/JSON-LD to match each other exactly. Do the same for /reseller-pakket's separate FAQ.</div>
+        <div class="action-impact">Removes the structured-data mismatch risking loss of the FAQ rich result.</div>
+      </div>
+      <span class="badge badge-high">High</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">3</div>
+      <div class="action-content">
+        <div class="action-title">Add BlogPosting JSON-LD to both blog posts</div>
+        <div class="action-desc">headline, datePublished, author, image — set client-side alongside the existing title/meta effect in BlogPostPage.</div>
+        <div class="action-impact">Makes the two highest-effort content pieces eligible for article rich results.</div>
+      </div>
+      <span class="badge badge-medium">Medium</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">4</div>
+      <div class="action-content">
+        <div class="action-title">Cross-link /abonnementen, /3maanden-Gratis, and /reseller-pakket</div>
+        <div class="action-desc">Add a small links row to each page's custom header/footer area.</div>
+        <div class="action-impact">Distributes link equity across the three highest-intent pages instead of isolating them.</div>
+      </div>
+      <span class="badge badge-medium">Medium</span>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; color: var(--purple);">Strategic Initiatives <span style="font-size: 14px; color: var(--text-muted); font-weight: 400;">&mdash; ongoing</span></div>
+  <div style="margin-bottom: 24px;">
+    <div class="action-item">
+      <div class="action-number">1</div>
+      <div class="action-content">
+        <div class="action-title">Resolve the tvpikoma brand-name search collision</div>
+        <div class="action-desc">Requires a business decision, not a code change: investigate the copycat/similarly-named domains, consider legal options if warranted, and lean on paid brand search in the meantime.</div>
+        <div class="action-impact">This is likely the highest-leverage item on the entire list.</div>
+      </div>
+      <span class="badge badge-critical">Critical</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">2</div>
+      <div class="action-content">
+        <div class="action-title">Build out informational content — "wat is IPTV", device install guides</div>
+        <div class="action-desc">Closes the content-depth gap against competitors averaging 4,500+ words on a single page.</div>
+        <div class="action-impact">Targets top-of-funnel search volume the current 2-post blog doesn't reach.</div>
+      </div>
+      <span class="badge badge-medium">Medium</span>
+    </div>
+    <div class="action-item">
+      <div class="action-number">3</div>
+      <div class="action-content">
+        <div class="action-title">Evaluate prerendering or SSR for the 7 known routes</div>
+        <div class="action-desc">Would make every fix above visible to non-JS-executing tools and link previews immediately, instead of depending on Google's delayed rendering wave.</div>
+        <div class="action-impact">Removes the root cause underlying several of the High/Critical findings at once.</div>
+      </div>
+      <span class="badge badge-low">Low</span>
+    </div>
+  </div>
+
+  <div class="section-title" style="font-size: 18px; margin-top: 32px;">Full Implementation Checklist</div>
+  <div class="section-subtitle">Every actionable recommendation in one list</div>
+  <div class="card">
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text">Investigate/resolve the tvpikoma brand-name search collision</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Set canonical tags in Blog.tsx (both list and post views) — done via a shared <code>applyPageMeta()</code> helper in src/lib/pageMeta.ts</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Trim homepage title (~51 chars rendered) and meta description (~132 chars rendered)</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Extend per-page useEffects to update og:*/twitter:* tags — Abonnementen, ResellerPack, DrieMandenGratis, BlogList, BlogPostPage</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Regenerate FAQPage JSON-LD to match FAQ.tsx's FAQ_DATA</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Give /reseller-pakket its own FAQPage schema matching its visible FAQ (swapped in/out via <code>setFaqPageSchema()</code>)</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Add BlogPosting schema to both blog posts</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Link both blog posts to /abonnementen (plus the blog list page)</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Cross-link /abonnementen, /3-maanden-gratis, /reseller-pakket</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Normalize the URL slug to /3-maanden-gratis with a 301-style client-side redirect from the old path</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Make BreadcrumbList schema per-page and complete — every page now sets its own trail via <code>setBreadcrumbSchema()</code>, resets to Home on unmount</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text">Fix sitemap.xml lastmod dates going forward — not yet done (only the /3-maanden-gratis entry was touched, for the slug rename); this needs an ongoing habit, not a one-time fix</div></div>
+    <div class="checklist-item"><div class="check-icon pass">&#10003;</div><div class="check-text">Add explicit security headers (HSTS, X-Content-Type-Options, X-Frame-Options, Referrer-Policy) via vercel.json — CSP deliberately skipped, too easy to break gtag/fonts without live testing</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text">Publish a "Wat is IPTV en hoe werkt het?" explainer</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text">Publish device-specific installation guides (Firestick, Smart TV, Android box)</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text">Add explicit security headers (HSTS/CSP/etc.) via vercel.json</div></div>
+    <div class="checklist-item"><div class="check-icon fail">&#10007;</div><div class="check-text">Evaluate prerendering/SSR for long-term structural fix</div></div>
+  </div>
+
+</div>
+</div>
+
+<script>
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + tabId).classList.add('active');
+  event.target.closest('.tab-btn').classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+document.querySelectorAll('.collapsible-header').forEach(header => {
+  header.addEventListener('click', () => {
+    header.closest('.collapsible').classList.toggle('open');
+  });
+});
+</script>
+
+</body>
+</html>

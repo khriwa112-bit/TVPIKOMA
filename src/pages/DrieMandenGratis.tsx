@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Check, MessageCircle, Gift, Zap, Shield, Tv, Star } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
 
 const getTimeUntilMidnight = () => {
   const now = new Date();
@@ -36,17 +38,19 @@ export default function DrieMandenGratis() {
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 
   useEffect(() => {
-    document.title = "tvpikoma – 3 Maanden Gratis IPTV | Activeer Vandaag & Kijk Direct";
-    document.querySelector('meta[name="description"]')?.setAttribute("content",
-      "Krijg 3 maanden gratis bij tvpikoma! Bestel 12 maanden en kijk 15 maanden voor de prijs van 12. Activeer vandaag en kijk direct. Slechts €5,20/maand."
-    );
-    document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/3maanden-Gratis");
+    applyPageMeta({
+      title: "tvpikoma – 3 Maanden Gratis IPTV | Activeer Vandaag & Kijk Direct",
+      description:
+        "Krijg 3 maanden gratis bij tvpikoma! Bestel 12 maanden en kijk 15 maanden voor de prijs van 12. Activeer vandaag en kijk direct. Slechts €5,20/maand.",
+      canonical: "https://tivipikoma.com/3-maanden-gratis",
+      ogTitle: "tvpikoma – 3 Maanden Gratis IPTV",
+      ogDescription:
+        "Bestel 12 maanden en kijk 15 maanden voor de prijs van 12. Activeer vandaag, kijk direct. Slechts €5,20/maand.",
+    });
+    setBreadcrumbSchema([{ name: "3 Maanden Gratis", path: "/3-maanden-gratis" }]);
     return () => {
-      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
-      document.querySelector('meta[name="description"]')?.setAttribute("content",
-        "tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films & series in 4K/8K kwaliteit."
-      );
-      document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/");
+      applyPageMeta(DEFAULT_PAGE_META);
+      setBreadcrumbSchema(null);
     };
   }, []);
 
@@ -216,6 +220,16 @@ export default function DrieMandenGratis() {
           ))}
         </div>
       </section>
+
+      {/* Related pages */}
+      <div className="max-w-5xl mx-auto px-4 py-6 flex flex-wrap items-center justify-center gap-3 text-xs">
+        <Link to="/abonnementen" className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 font-semibold hover:bg-white/10 transition-colors">
+          Liever een ander pakket? Bekijk alle abonnementen
+        </Link>
+        <Link to="/reseller-pakket" className="px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/70 font-semibold hover:bg-white/10 transition-colors">
+          Reseller worden
+        </Link>
+      </div>
 
       {/* Footer */}
       <footer className="border-t border-white/5 text-white/30 text-center text-xs py-6">

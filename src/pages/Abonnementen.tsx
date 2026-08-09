@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Check, MessageCircle } from "lucide-react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
 
 const periods: { id: BillingPeriod; label: string; sub: string; bonus?: boolean }[] = [
   { id: "3_months",         label: "3 Maanden",    sub: "€11,99/maand" },
@@ -30,17 +32,19 @@ export default function Abonnementen() {
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 
   useEffect(() => {
-    document.title = "tvpikoma Abonnementen – Kies het beste IPTV pakket | Vanaf €5/maand";
-    document.querySelector('meta[name="description"]')?.setAttribute("content",
-      "Bekijk alle tvpikoma IPTV abonnementen. Kies het beste pakket voor jouw situatie – Basis of Premium VIP+. Prijzen vanaf €5/maand. Direct actief na betaling."
-    );
-    document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/abonnementen");
+    applyPageMeta({
+      title: "tvpikoma Abonnementen – Kies het beste IPTV pakket | Vanaf €5/maand",
+      description:
+        "Bekijk alle tvpikoma IPTV abonnementen. Kies het beste pakket voor jouw situatie – Basis of Premium VIP+. Prijzen vanaf €5/maand. Direct actief na betaling.",
+      canonical: "https://tivipikoma.com/abonnementen",
+      ogTitle: "tvpikoma Abonnementen – Kies het beste IPTV pakket",
+      ogDescription:
+        "Basis of Premium VIP+, vanaf €5/maand. Bekijk alle tvpikoma IPTV abonnementen en bestel direct via WhatsApp.",
+    });
+    setBreadcrumbSchema([{ name: "Abonnementen", path: "/abonnementen" }]);
     return () => {
-      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
-      document.querySelector('meta[name="description"]')?.setAttribute("content",
-        "tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films & series in 4K/8K kwaliteit."
-      );
-      document.querySelector('link[rel="canonical"]')?.setAttribute("href", "https://tivipikoma.com/");
+      applyPageMeta(DEFAULT_PAGE_META);
+      setBreadcrumbSchema(null);
     };
   }, []);
 
@@ -186,6 +190,19 @@ export default function Abonnementen() {
           ))}
         </div>
       </section>
+
+      {/* Related pages */}
+      <div className="max-w-5xl mx-auto px-4 pb-4 flex flex-wrap items-center justify-center gap-3 text-xs">
+        <Link to="/3-maanden-gratis" className="px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-800 font-semibold hover:bg-green-100 transition-colors">
+          🎁 3 maanden gratis actie
+        </Link>
+        <Link to="/reseller-pakket" className="px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-800 font-semibold hover:bg-green-100 transition-colors">
+          Reseller worden
+        </Link>
+        <Link to="/blog" className="px-4 py-2 rounded-full bg-green-50 border border-green-200 text-green-800 font-semibold hover:bg-green-100 transition-colors">
+          Blog & vergelijkingen
+        </Link>
+      </div>
 
       {/* Footer */}
       <footer className="bg-green-900 text-green-300 text-center text-xs py-6 mt-8">

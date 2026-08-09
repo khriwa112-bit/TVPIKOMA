@@ -27,8 +27,8 @@
     <link rel="apple-touch-icon" href="/favicon-1200.png" />
 
     <!-- Primary SEO -->
-    <title>tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K &amp; Onbeperkt Kijken</title>
-    <meta name="description" content="tvpikoma is de #1 IPTV provider van Nederland. Geniet van 80.000+ kanalen, 200.000+ films &amp; series in 4K/8K kwaliteit. Bestel vandaag je tvpikoma abonnement en kijk alles op elk apparaat." />
+    <title>tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen &amp; 4K</title>
+    <meta name="description" content="tvpikoma is de #1 IPTV provider van Nederland met 80.000+ kanalen en 200.000+ films &amp; series in 4K/8K. Bestel je abonnement vandaag." />
     <meta name="keywords" content="tvpikoma, IPTV Nederland, IPTV abonnement, beste IPTV, 4K IPTV, IPTV kanalen, IPTV kopen, tvpikoma abonnement, tvpikoma IPTV, tivipikoma" />
     <meta name="robots" content="index, follow" />
     <meta name="author" content="tvpikoma" />
@@ -43,14 +43,19 @@
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://tivipikoma.com/" />
     <meta property="og:site_name" content="tvpikoma" />
-    <meta property="og:title" content="tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen &amp; 4K Kwaliteit" />
-    <meta property="og:description" content="tvpikoma biedt de beste IPTV-ervaring in Nederland. 80.000+ kanalen, 200.000+ films &amp; series, 4K/8K kwaliteit en support 24/7. Probeer tvpikoma vandaag." />
+    <meta property="og:title" content="tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen &amp; 4K" />
+    <meta property="og:description" content="tvpikoma is de #1 IPTV provider van Nederland met 80.000+ kanalen en 200.000+ films &amp; series in 4K/8K. Bestel je abonnement vandaag." />
     <meta property="og:locale" content="nl_NL" />
+    <meta property="og:image" content="https://tivipikoma.com/favicon-1200.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="1200" />
+    <meta property="og:image:alt" content="tvpikoma logo" />
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="tvpikoma | #1 IPTV Nederland" />
     <meta name="twitter:description" content="tvpikoma – De beste IPTV provider van Nederland. 80.000+ kanalen, 4K kwaliteit, alle apparaten. Bestel nu." />
+    <meta name="twitter:image" content="https://tivipikoma.com/favicon-1200.png" />
 
     <!-- JSON-LD: Organization -->
     <script type="application/ld+json">
@@ -60,7 +65,13 @@
       "name": "tvpikoma",
       "alternateName": "tivipikoma",
       "url": "https://tivipikoma.com/",
-      "logo": "https://tivipikoma.com/favicon-1200.png",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://tivipikoma.com/favicon-1200.png",
+        "width": 1200,
+        "height": 1200
+      },
+      "image": "https://tivipikoma.com/favicon-1200.png",
       "description": "tvpikoma is de #1 IPTV provider van Nederland met 80.000+ kanalen en 200.000+ films & series in 4K kwaliteit.",
       "contactPoint": {
         "@type": "ContactPoint",
@@ -80,6 +91,7 @@
       "name": "tvpikoma",
       "url": "https://tivipikoma.com/",
       "description": "tvpikoma IPTV – 80.000+ kanalen, 4K kwaliteit, alle apparaten. De #1 IPTV provider van Nederland.",
+      "image": "https://tivipikoma.com/favicon-1200.png",
       "inLanguage": "nl-NL",
       "potentialAction": {
         "@type": "SearchAction",
@@ -131,8 +143,10 @@
     }
     </script>
 
-    <!-- JSON-LD: FAQ (rich results in Google) -->
-    <script type="application/ld+json">
+    <!-- JSON-LD: FAQ (rich results in Google) — mirrors src/data.ts FAQ_DATA, which is what
+         FAQ.tsx actually renders on the homepage. Keep these in sync; a mismatch here risks
+         losing the FAQ rich result under Google's structured-data guidelines. -->
+    <script type="application/ld+json" id="faqpage-schema">
     {
       "@context": "https://schema.org",
       "@type": "FAQPage",
@@ -142,55 +156,65 @@
           "name": "Wat is tvpikoma IPTV en hoe werkt het precies?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "tvpikoma is een premium IPTV provider die televisie via het internet streamt. Je hebt geen schotel of coax-kabels meer nodig. Met een tvpikoma abonnement krijg je direct toegang tot meer dan 80.000+ live zenders, waaronder alle Nederlandse zenders, sportkanalen (ESPN, Ziggo, Viaplay) en een bibliotheek van 200.000+ films en series."
+            "text": "tvpikoma is een premium IPTV provider die televisie via het internet streamt. Je hebt geen schotel of coax-kabels meer nodig. Met ons abonnement krijg je via een handige app op je Smart TV, telefoon, tablet of computer direct toegang tot meer dan 20.000+ live zenders, waaronder alle Nederlandse zenders, sportkanalen (ESPN, Ziggo, Viaplay) en een enorme bibliotheek aan films en series (VOD)."
           }
         },
         {
           "@type": "Question",
-          "name": "Hoe snel wordt mijn tvpikoma account geactiveerd?",
+          "name": "Is de installatie ingewikkeld en welke apparaten worden ondersteund?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "tvpikoma activeert je account direct na ontvangst van de betaling. De inloggegevens worden automatisch binnen 3 tot 5 minuten naar je e-mailadres verzonden."
+            "text": "Nee, de installatie is heel eenvoudig en binnen 5 minuten gepiept! tvpikoma werkt op vrijwel elk apparaat: Smart TV's (Samsung, LG, Sony met apps zoals IPTV Smarters, Flix IPTV of IBOTV), Amazon Fire TV Stick, Android TV boxen, Apple TV, smartphones (iOS/Android), tablets, Chromecast en PC. Na bestelling sturen we je een heldere, stap-voor-stap handleiding per e-mail toe, en onze support helpt je direct via WhatsApp als je er niet uitkomt."
           }
         },
         {
           "@type": "Question",
-          "name": "Wat kost een tvpikoma abonnement?",
+          "name": "Zit ik vast aan een langdurig contract of abonnement?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "tvpikoma abonnementen starten vanaf €24,99 voor 3 maanden (€8,33/maand). Het populairste pakket is 12+3 maanden voor slechts €78,00 – dat is €5,20 per maand. Je krijgt dan 15 maanden IPTV voor de prijs van 12."
+            "text": "Absoluut niet. Bij tvpikoma hanteren we uitsluitend flexibele pre-paid pakketten. Je kiest zelf of je 1, 3, 6 of 12 maanden wilt kijken. Na deze periode stopt het abonnement automatisch, tenzij je er zelf voor kiest om te verlengen. Geen automatische incasso's en geen stilzwijgende verlengingen. Je zit dus nergens aan vast!"
           }
         },
         {
           "@type": "Question",
-          "name": "Op welke apparaten werkt tvpikoma?",
+          "name": "Hoe snel wordt mijn IPTV account geactiveerd?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "tvpikoma werkt op Smart TV (Samsung, LG, Sony), Amazon Fire TV Stick, Android TV boxen, Apple TV, smartphones (iOS/Android), tablets, PC en Mac. Kortom: alle apparaten."
+            "text": "Wij leveren extreem snel! Onze systemen activeren je account direct na ontvangst van de betaling. De inloggegevens (M3U playlist link en Xtream Codes API serverdetails) worden automatisch binnen 3 tot 5 minuten naar je e-mailadres verzonden. Mocht je binnen 10 minuten niks hebben ontvangen, controleer dan je spambox of stuur ons direct een berichtje via WhatsApp!"
           }
         },
         {
           "@type": "Question",
-          "name": "Zit ik vast aan een contract bij tvpikoma?",
+          "name": "Heb ik speciale internet-snelheden nodig voor buffer-vrij 4K/UHD streamen?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "Nee, tvpikoma gebruikt uitsluitend flexibele pre-paid pakketten. Na de gekozen periode stopt het abonnement automatisch. Geen automatische incasso's en geen stilzwijgende verlengingen."
+            "text": "Om soepel in 4K/UHD te streamen raden we een stabiele internetverbinding aan van ten minste 25 Mbps. Voor HD/FHD streams is 15 Mbps al ruim voldoende. Onze innovatieve servers gebruiken geavanceerde compressietechnologie en H.265 codecs, waardoor de streams stabiel blijven en buffering nagenoeg verleden tijd is."
           }
         },
         {
           "@type": "Question",
-          "name": "Welke betaalmethoden accepteert tvpikoma?",
+          "name": "Kan ik het tvpikoma abonnement op meerdere apparaten tegelijkertijd gebruiken?",
           "acceptedAnswer": {
             "@type": "Answer",
-            "text": "tvpikoma accepteert iDEAL (alle Nederlandse banken), Bancontact (België), PayPal en Creditcard (Visa/Mastercard)."
+            "text": "Standaard is ons abonnement geschikt voor 1 apparaat tegelijk (1 actieve stream). Mocht je op meerdere TV's of apparaten tegelijk in huis willen kijken, dan kun je in onze prijsconfigurator eenvoudig upgraden naar 2, 3 of 4 schermen voor je gehele huishouden tegen een flinke korting."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Welke betaalmethoden ondersteunen jullie?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Omdat we ons richten op de Nederlandse en Belgische markt bieden we extreem veilige en vertrouwde nationale betaalmethoden aan. Je kunt probleemloos betalen via iDEAL (met alle Nederlandse banken zoals ING, Rabobank, ABN, etc.), Bancontact (voor onze Belgische klanten), PayPal en Creditcard (Visa/Mastercard)."
           }
         }
       ]
     }
     </script>
 
-    <!-- JSON-LD: BreadcrumbList for sub-pages -->
-    <script type="application/ld+json">
+    <!-- JSON-LD: BreadcrumbList — default is just Home; each sub-page overrides this via
+         setBreadcrumbSchema() in src/lib/pageMeta.ts to reflect its own position, and resets
+         it back to this default on unmount. -->
+    <script type="application/ld+json" id="breadcrumb-schema">
     {
       "@context": "https://schema.org",
       "@type": "BreadcrumbList",
@@ -200,18 +224,6 @@
           "position": 1,
           "name": "tvpikoma",
           "item": "https://tivipikoma.com/"
-        },
-        {
-          "@type": "ListItem",
-          "position": 2,
-          "name": "Abonnementen",
-          "item": "https://tivipikoma.com/abonnementen"
-        },
-        {
-          "@type": "ListItem",
-          "position": 3,
-          "name": "3 Maanden Gratis",
-          "item": "https://tivipikoma.com/3maanden-Gratis"
         }
       ]
     }

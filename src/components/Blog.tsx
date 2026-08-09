@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { MessageCircle, ArrowLeft, ExternalLink } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
 
 type BlogBlock =
   | { type: "p"; text: string }
@@ -18,6 +19,7 @@ interface BlogPost {
   excerpt: string;
   category: string;
   date: string;
+  isoDate: string;
   readTime: string;
   content: BlogBlock[];
 }
@@ -33,6 +35,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "De grote providers verhogen hun prijzen. Steeds meer mensen zoeken een stabiel alternatief voor Nordic IPTV. We zetten TVpikoma en SwivTV naast elkaar.",
     category: "Vergelijking",
     date: "7 augustus 2026",
+    isoDate: "2026-08-07",
     readTime: "4 min",
     content: [
       {
@@ -118,6 +121,7 @@ export const BLOG_POSTS: BlogPost[] = [
       "Wat betaal je nu eigenlijk voor TVpikoma? We zetten alle abonnementsvormen naast elkaar, van 3 maanden tot de 12+3 actie.",
     category: "Advies",
     date: "7 augustus 2026",
+    isoDate: "2026-08-07",
     readTime: "3 min",
     content: [
       {
@@ -210,13 +214,17 @@ function BlogShellHeader({ whatsappNumber }: { whatsappNumber: string }) {
 
 export function BlogList() {
   useEffect(() => {
-    document.title = "Blog — IPTV nieuws, vergelijkingen & advies | tvpikoma";
-    document.querySelector('meta[name="description"]')?.setAttribute(
-      "content",
-      "Alles over IPTV: vergelijkingen, prijzen en advies. Geschreven door het tvpikoma team."
-    );
+    applyPageMeta({
+      title: "Blog — IPTV nieuws, vergelijkingen & advies | tvpikoma",
+      description: "Alles over IPTV: vergelijkingen, prijzen en advies. Geschreven door het tvpikoma team.",
+      canonical: "https://tivipikoma.com/blog",
+      ogTitle: "tvpikoma Blog — IPTV nieuws, vergelijkingen & advies",
+      ogDescription: "Vergelijkingen, prijzen en tips over IPTV, geschreven door het tvpikoma team.",
+    });
+    setBreadcrumbSchema([{ name: "Blog", path: "/blog" }]);
     return () => {
-      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
+      applyPageMeta(DEFAULT_PAGE_META);
+      setBreadcrumbSchema(null);
     };
   }, []);
 
@@ -252,6 +260,16 @@ export function BlogList() {
             </Link>
           ))}
         </div>
+
+        <div className="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4 bg-green-50 border border-green-100 rounded-2xl p-6">
+          <p className="text-sm text-green-800 font-medium text-center sm:text-left">Weten wat een tvpikoma abonnement precies kost?</p>
+          <Link
+            to="/abonnementen"
+            className="shrink-0 px-5 py-2.5 rounded-xl bg-green-700 hover:bg-green-800 text-white font-bold text-xs tracking-wide whitespace-nowrap text-center transition-colors"
+          >
+            Bekijk onze abonnementen
+          </Link>
+        </div>
       </section>
     </div>
   );
@@ -264,10 +282,43 @@ export function BlogPostPage() {
 
   useEffect(() => {
     if (!post) return;
-    document.title = post.metaTitle;
-    document.querySelector('meta[name="description"]')?.setAttribute("content", post.metaDescription);
+    const canonical = `https://tivipikoma.com/blog/${post.slug}`;
+    applyPageMeta({
+      title: post.metaTitle,
+      description: post.metaDescription,
+      canonical,
+      ogTitle: post.title,
+      ogDescription: post.metaDescription,
+    });
+
+    const schema = document.createElement("script");
+    schema.type = "application/ld+json";
+    schema.id = "blogposting-schema";
+    schema.text = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: post.title,
+      description: post.metaDescription,
+      datePublished: post.isoDate,
+      dateModified: post.isoDate,
+      url: canonical,
+      inLanguage: "nl-NL",
+      author: { "@type": "Organization", name: "tvpikoma" },
+      publisher: { "@type": "Organization", name: "tvpikoma", logo: { "@type": "ImageObject", url: "https://tivipikoma.com/favicon-1200.png" } },
+      image: "https://tivipikoma.com/favicon-1200.png",
+      mainEntityOfPage: { "@type": "WebPage", "@id": canonical },
+    });
+    document.head.appendChild(schema);
+
+    setBreadcrumbSchema([
+      { name: "Blog", path: "/blog" },
+      { name: post.title, path: `/blog/${post.slug}` },
+    ]);
+
     return () => {
-      document.title = "tvpikoma | #1 IPTV Nederland – 80.000+ Kanalen, 4K & Onbeperkt Kijken";
+      applyPageMeta(DEFAULT_PAGE_META);
+      setBreadcrumbSchema(null);
+      document.getElementById("blogposting-schema")?.remove();
     };
   }, [post]);
 
@@ -335,13 +386,19 @@ export function BlogPostPage() {
           })}
         </div>
 
-        <div className="mt-12 pt-8 border-t border-green-100">
+        <div className="mt-12 pt-8 border-t border-green-100 flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => openBlogWhatsApp(whatsappNumber, post.title)}
-            className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold px-5 py-3 rounded-xl transition-colors"
+            className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-sm font-bold px-5 py-3 rounded-xl transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Stel je vraag via WhatsApp
           </button>
+          <Link
+            to="/abonnementen"
+            className="flex items-center justify-center gap-2 bg-green-50 hover:bg-green-100 border border-green-200 text-green-800 text-sm font-bold px-5 py-3 rounded-xl transition-colors"
+          >
+            Bekijk onze abonnementen
+          </Link>
         </div>
       </article>
     </div>
