@@ -1,9 +1,8 @@
-import { useState, FormEvent, useEffect } from "react";
-import { motion, AnimatePresence } from "motion/react";
-import { Check, RefreshCw, Copy } from "lucide-react";
+import { useState, useEffect } from "react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import CheckoutModal from "./CheckoutModal";
 
 export default function PricingCalculator() {
     const whatsappNumber = useWhatsAppNumber();
@@ -23,26 +22,7 @@ export default function PricingCalculator() {
   }, []);
   const [selectedDevices, setSelectedDevices] = useState<"1"|"2"|"3"|"4">("1");
   const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-  const [checkoutStep, setCheckoutStep] = useState<"details"|"payment"|"processing"|"success">("details");
-  const [email, setEmail] = useState("");
-  const [targetDevice, setTargetDevice] = useState("Smart TV (IPTV Smarters / Flix)");
-  const [paymentMethod, setPaymentMethod] = useState("ideal");
-  const [selectedBank, setSelectedBank] = useState("rabobank");
-  const [generatedLine, setGeneratedLine] = useState({ username:"", password:"", m3uUrl:"", host:"http://line.tivipikoma.com:80" });
-
-  const periodInfo = PRICING_MAPPING[selectedPeriod];
-  const deviceAddons = { "1":0,"2":2.25,"3":3.75,"4":4.95 };
-  const calculatedMonthlyPrice = Number((periodInfo.pricePerMonth + deviceAddons[selectedDevices]).toFixed(2));
-  const totalMonths = periodInfo.months + periodInfo.bonusMonths;
-  const calculatedTotalPrice = Number((calculatedMonthlyPrice * periodInfo.months).toFixed(2));
-
-  const handleProcessPayment = (e: FormEvent) => {
-    e.preventDefault(); if (!email) return;
-    setCheckoutStep("processing");
-    const user = `swiv_${Math.random().toString(36).substring(2,8)}`;
-    setGeneratedLine({ username:user, password:Math.random().toString(36).substring(2,10), m3uUrl:`http://line.tivipikoma.com:80/get.php?auth=tvpikoma_${user}&output=ts`, host:"http://line.tivipikoma.com:80" });
-    setTimeout(() => setCheckoutStep("success"), 2800);
-  };
+  const [selectedOrder, setSelectedOrder] = useState<{ plan: "VIP" | "Basis"; price: number } | null>(null);
 
   const vipPrices: Record<BillingPeriod, Record<string, number>> = {
     "3_months":        { "1": 34.99, "2": 49.99, "3": 69.99, "4": 89.99 },
@@ -65,12 +45,11 @@ export default function PricingCalculator() {
     { id:"12_plus_3_months" as BillingPeriod, label:"12+3 Maanden", sub:"€5,20/maand!", bonus:true },
   ];
 
-  const openWhatsApp = (plan: "VIP" | "Basis", price: number) => {
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
-    const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
-    const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
-    window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+  const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
+
+  const startCheckout = (plan: "VIP" | "Basis", price: number) => {
+    setSelectedOrder({ plan, price });
+    setCheckoutModalOpen(true);
   };
 
   return (
@@ -187,7 +166,7 @@ export default function PricingCalculator() {
             <h3 className="text-3xl font-extrabold font-display text-green-900 mb-1">✦ PREMIUM VIP +</h3>
             <p className="text-green-800/70 text-xs font-sans uppercase tracking-widest mb-4">12+3 MAANDEN</p>
             <div className="mb-4">
-              <span onClick={() => openWhatsApp("VIP", vipPrice)}
+              <span onClick={() => startCheckout("VIP", vipPrice)}
                 className="text-5xl font-black text-green-900 font-display cursor-pointer hover:text-green-700 transition-colors">
                 €{vipPrice.toFixed(2).replace(".",",")}
               </span>
@@ -224,7 +203,7 @@ export default function PricingCalculator() {
               ))}
             </div>
 
-            <button onClick={() => openWhatsApp("VIP", vipPrice)}
+            <button onClick={() => startCheckout("VIP", vipPrice)}
               className="w-full py-3.5 rounded-xl bg-green-900 hover:bg-green-800 text-amber-400 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer mt-auto shadow-lg">
               Bestel Nu &rarr;
             </button>
@@ -235,7 +214,7 @@ export default function PricingCalculator() {
             <h3 className="text-3xl font-extrabold font-display text-green-900 mb-1 mt-2">Basis</h3>
             <p className="text-green-600 text-xs font-sans uppercase tracking-widest mb-4">12 MAANDEN</p>
             <div className="mb-4">
-              <span onClick={() => openWhatsApp("Basis", normalPrice)}
+              <span onClick={() => startCheckout("Basis", normalPrice)}
                 className="text-5xl font-black text-green-900 cursor-pointer hover:text-green-700 transition-colors" style={{ fontFamily: "'Sour Gummy', cursive" }}>
                 €{normalPrice.toFixed(2).replace(".",",")}
               </span>
@@ -271,7 +250,7 @@ export default function PricingCalculator() {
               ))}
             </div>
 
-            <button onClick={() => openWhatsApp("Basis", normalPrice)}
+            <button onClick={() => startCheckout("Basis", normalPrice)}
               className="w-full py-3.5 rounded-xl bg-green-50 hover:bg-green-100 border border-green-300 text-green-800 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer mt-auto">
               Bestel Nu &rarr;
             </button>
@@ -280,122 +259,21 @@ export default function PricingCalculator() {
 
       </div>
 
-      {/* Checkout Modal */}
-      <AnimatePresence>
-        {checkoutModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-green-950/70 backdrop-blur-md">
-            <motion.div initial={{opacity:0,scale:0.95}} animate={{opacity:1,scale:1}} exit={{opacity:0,scale:0.95}}
-              className="relative w-full max-w-lg bg-white border border-green-200 rounded-2xl shadow-2xl p-6 sm:p-8 text-green-900 max-h-[90vh] overflow-y-auto">
-              <button onClick={() => setCheckoutModalOpen(false)} className="absolute top-4 right-4 px-3 py-1 rounded-lg bg-green-50 text-green-600 hover:text-green-900 text-xs font-bold">Sluiten</button>
-
-              <div className="flex items-center justify-between mb-6 pb-4 border-b border-green-100 text-xs text-green-500 font-sans">
-                {["details","payment","processing","success"].map((step,i)=>(
-                  <span key={step} className={checkoutStep===step?"text-green-900 font-bold":"text-green-400"}>
-                    {i+1}. {["Account","Betaling","Activatie","Voltooid"][i]}
-                  </span>
-                ))}
-              </div>
-
-              {checkoutStep==="details" && (
-                <div className="text-left">
-                  <h3 className="text-lg font-bold text-green-900 mb-2">Configureer je Account</h3>
-                  <p className="text-xs text-green-600 mb-5">We sturen je inloggegevens direct naar je e-mail.</p>
-                  <div className="flex flex-col gap-4">
-                    <div>
-                      <label className="text-xs font-bold text-green-600 block mb-1.5 font-sans">E-mailadres:</label>
-                      <input type="email" required value={email} onChange={e=>setEmail(e.target.value)} placeholder="jouw@email.nl"
-                        className="w-full bg-green-50 border border-green-200 rounded-xl py-3 px-4 text-sm text-green-900 placeholder-green-400 focus:outline-none focus:border-green-400"/>
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-green-600 block mb-1.5 font-sans">Apparaat:</label>
-                      <select value={targetDevice} onChange={e=>setTargetDevice(e.target.value)} className="w-full bg-green-50 border border-green-200 rounded-xl py-3 px-4 text-sm text-green-900 focus:outline-none">
-                        <option>Smart TV (IPTV Smarters / Flix)</option>
-                        <option>Amazon Firestick (TiviMate)</option>
-                        <option>Android Box / Nvidia Shield</option>
-                        <option>Apple TV / iPhone</option>
-                        <option>PC / Mac (VLC)</option>
-                      </select>
-                    </div>
-                    <div className="p-3.5 rounded-xl bg-green-50 border border-green-200 text-xs text-green-600">
-                      <span className="font-bold text-green-900">Pakket:</span> {totalMonths} Maanden, {selectedDevices} Scherm(en) — <strong className="text-green-900">€{calculatedTotalPrice.toFixed(2)}</strong>
-                    </div>
-                    <button onClick={() => { if(email.includes("@")){setCheckoutStep("payment");}else{alert("Vul een geldig e-mailadres in!");}}}
-                      className="w-full mt-4 py-3.5 rounded-xl bg-green-600 text-white hover:bg-green-700 font-bold text-sm text-center transition-colors">
-                      Ga naar betalen &rarr;
-                    </button>
-                  </div>
-                </div>
-              )}
-
-              {checkoutStep==="payment" && (
-                <div className="text-left">
-                  <h3 className="text-lg font-bold text-green-900 mb-2">Kies betaalmethode</h3>
-                  <form onSubmit={handleProcessPayment} className="flex flex-col gap-4 mt-5">
-                    {[{id:"ideal",label:"iDEAL (Nederland)",badge:"Populair"},{id:"bancontact",label:"Bancontact (België)",badge:""},{id:"paypal",label:"PayPal",badge:""},{id:"cc",label:"Creditcard (Visa/MC)",badge:""}].map(pm=>(
-                      <div key={pm.id} onClick={()=>setPaymentMethod(pm.id)}
-                        className={`p-4 rounded-xl border cursor-pointer transition-all ${paymentMethod===pm.id?"bg-green-50 border-green-400":"bg-white border-green-100 hover:border-green-200"}`}>
-                        <div className="flex items-center justify-between">
-                          <span className="text-sm font-bold flex items-center gap-2 text-green-900">
-                            <span className={`w-4 h-4 rounded-full border-2 flex items-center justify-center ${paymentMethod===pm.id?"border-green-600":"border-green-300"}`}>
-                              {paymentMethod===pm.id&&<span className="w-2 h-2 bg-green-600 rounded-full"/>}
-                            </span>
-                            {pm.label}
-                          </span>
-                          {pm.badge&&<span className="bg-green-600 text-white text-[9px] font-bold px-1.5 py-0.5 rounded">{pm.badge}</span>}
-                        </div>
-                        {pm.id==="ideal"&&paymentMethod==="ideal"&&(
-                          <select value={selectedBank} onChange={e=>setSelectedBank(e.target.value)} className="mt-3 w-full bg-white border border-green-200 rounded-lg py-2 px-3 text-xs text-green-900">
-                            {["rabobank","ing","abn","sns","bunq","revolut"].map(b=><option key={b} value={b}>{b.charAt(0).toUpperCase()+b.slice(1)}</option>)}
-                          </select>
-                        )}
-                      </div>
-                    ))}
-                    <div className="flex gap-2">
-                      <button type="button" onClick={()=>setCheckoutStep("details")} className="w-1/3 py-3.5 border border-green-200 rounded-xl text-green-600 font-bold text-sm">Terug</button>
-                      <button type="submit" className="w-2/3 py-3.5 rounded-xl bg-green-600 text-white hover:bg-green-700 font-bold text-sm transition-colors">Voldoe €{calculatedTotalPrice.toFixed(2)}</button>
-                    </div>
-                  </form>
-                </div>
-              )}
-
-              {checkoutStep==="processing" && (
-                <div className="py-8 flex flex-col items-center justify-center text-center">
-                  <RefreshCw className="w-12 h-12 text-green-600 animate-spin mb-4"/>
-                  <h3 className="text-lg font-bold text-green-900 mb-2">Verwerken...</h3>
-                  <p className="text-xs text-green-600 max-w-sm">Verbinding met bank. We activeren je IPTV lijn.</p>
-                </div>
-              )}
-
-              {checkoutStep==="success" && (
-                <div className="text-left py-2">
-                  <div className="w-12 h-12 rounded-full bg-green-100 border border-green-300 text-green-600 flex items-center justify-center mb-4 mx-auto">
-                    <Check className="w-6 h-6 stroke-[3]"/>
-                  </div>
-                  <h3 className="text-xl font-bold text-green-900 text-center mb-1">Betaling Geslaagd!</h3>
-                  <p className="text-xs text-green-600 text-center mb-5">Jouw tvpikoma lijn is per direct geactiveerd.</p>
-                  <div className="bg-green-50 border border-green-200 rounded-xl p-4 flex flex-col gap-3 text-xs mb-5">
-                    {[{label:"Host:",val:generatedLine.host},{label:"Gebruikersnaam:",val:generatedLine.username},{label:"Wachtwoord:",val:generatedLine.password}].map((item,i)=>(
-                      <div key={i} className={`flex justify-between items-center py-1 ${i<2?"border-b border-green-100":""}`}>
-                        <span className="text-green-500">{item.label}</span>
-                        <span className="font-sans text-green-900 font-bold select-all">{item.val}</span>
-                      </div>
-                    ))}
-                    <div className="flex justify-between items-center py-1 border-t border-green-100">
-                      <span className="text-green-500">M3U URL:</span>
-                      <button onClick={()=>navigator.clipboard.writeText(generatedLine.m3uUrl).then(()=>alert("Gekopieerd!"))} className="text-green-700 font-bold flex items-center gap-1 font-sans text-[10px] hover:text-green-900">
-                        <Copy className="w-3 h-3"/> Kopieer
-                      </button>
-                    </div>
-                  </div>
-                  <button onClick={()=>setCheckoutModalOpen(false)} className="w-full py-3.5 rounded-xl bg-green-600 text-white hover:bg-green-700 font-bold text-sm transition-colors">
-                    Klaar, veel kijkplezier!
-                  </button>
-                </div>
-              )}
-            </motion.div>
-          </div>
-        )}
-      </AnimatePresence>
+      {selectedOrder && (
+        <CheckoutModal
+          isOpen={checkoutModalOpen}
+          onClose={() => setCheckoutModalOpen(false)}
+          whatsappNumber={whatsappNumber}
+          title={`Bestelling: ${selectedOrder.plan === "VIP" ? "Premium VIP+" : "Basis"}`}
+          orderLines={[
+            { label: "Pakket", value: selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
+            { label: "Periode", value: String(periodLabel) },
+            { label: "Schermen", value: selectedDevices },
+          ]}
+          total={`€${selectedOrder.price.toFixed(2).replace(".", ",")}`}
+          baseMessage={`[tvpikoma] Hallo, ik wil het *${selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${selectedOrder.price.toFixed(2).replace(".", ",")}.`}
+        />
+      )}
     </section>
   );
 }

@@ -5,6 +5,7 @@ import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
+import CheckoutModal from "../components/CheckoutModal";
 
 const periods: { id: BillingPeriod; label: string; sub: string; bonus?: boolean }[] = [
   { id: "3_months",         label: "3 Maanden",    sub: "€11,99/maand" },
@@ -49,13 +50,14 @@ export default function Abonnementen() {
   }, []);
 
   const periodInfo = PRICING_MAPPING[selectedPeriod];
+  const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
 
-  const openWhatsApp = (plan: "VIP" | "Basis", price: number) => {
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
-    const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
-    const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+  const [selectedOrder, setSelectedOrder] = useState<{ plan: "VIP" | "Basis"; price: number } | null>(null);
+
+  const startCheckout = (plan: "VIP" | "Basis", price: number) => {
+    setSelectedOrder({ plan, price });
+    setCheckoutModalOpen(true);
   };
 
   const vipPrice = vipPrices[selectedPeriod][selectedDevices];
@@ -76,7 +78,6 @@ export default function Abonnementen() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
-            onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Bestel via WhatsApp
@@ -157,7 +158,7 @@ export default function Abonnementen() {
                 </div>
               ))}
             </div>
-            <button onClick={() => openWhatsApp("VIP", vipPrice)}
+            <button onClick={() => startCheckout("VIP", vipPrice)}
               className="w-full py-3.5 rounded-xl bg-green-900 hover:bg-green-800 text-amber-400 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer shadow-lg">
               Bestel Nu via WhatsApp →
             </button>
@@ -176,7 +177,7 @@ export default function Abonnementen() {
                 </div>
               ))}
             </div>
-            <button onClick={() => openWhatsApp("Basis", normalPrice)}
+            <button onClick={() => startCheckout("Basis", normalPrice)}
               className="w-full py-3.5 rounded-xl bg-green-50 hover:bg-green-100 border border-green-300 text-green-800 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer">
               Bestel Nu via WhatsApp →
             </button>
@@ -208,6 +209,22 @@ export default function Abonnementen() {
       <footer className="bg-green-900 text-green-300 text-center text-xs py-6 mt-8">
         <p>© 2025 tvpikoma · Premium IPTV voor NL &amp; BE</p>
       </footer>
+
+      {selectedOrder && (
+        <CheckoutModal
+          isOpen={checkoutModalOpen}
+          onClose={() => setCheckoutModalOpen(false)}
+          whatsappNumber={WHATSAPP_NUMBER}
+          title={`Bestelling: ${selectedOrder.plan === "VIP" ? "Premium VIP+" : "Basis"}`}
+          orderLines={[
+            { label: "Pakket", value: selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
+            { label: "Periode", value: String(periodLabel) },
+            { label: "Schermen", value: selectedDevices },
+          ]}
+          total={`€${selectedOrder.price.toFixed(2).replace(".", ",")}`}
+          baseMessage={`[tvpikoma] Hallo, ik wil het *${selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${selectedOrder.price.toFixed(2).replace(".", ",")}.`}
+        />
+      )}
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, MessageCircle, TrendingUp, Key, Users, ShieldCheck, Sparkles, Star, Gift } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setFaqPageSchema, setBreadcrumbSchema } from "../lib/pageMeta";
+import CheckoutModal from "../components/CheckoutModal";
 
 interface CreditPack {
   id: string;
@@ -87,16 +88,15 @@ export default function ResellerPack() {
     };
   }, []);
 
-  const orderPack = (pack: CreditPack) => {
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
-    const msg = `[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${pack.name} pakket* (${pack.credits} credits) voor €${pack.price.toFixed(2).replace(".", ",")}.`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+  const [selectedPack, setSelectedPack] = useState<CreditPack | null>(null);
+
+  const startCheckout = (pack: CreditPack) => {
+    setSelectedPack(pack);
+    setCheckoutModalOpen(true);
   };
 
   const requestTestPanel = () => {
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const msg = `[tvpikoma] Hallo, ik ben geïnteresseerd om reseller te worden. Kan ik eerst een gratis testpaneel krijgen?`;
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
@@ -116,7 +116,6 @@ export default function ResellerPack() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
-            onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Bestel via WhatsApp
@@ -192,7 +191,7 @@ export default function ResellerPack() {
                 ))}
               </div>
 
-              <button onClick={() => orderPack(pack)}
+              <button onClick={() => startCheckout(pack)}
                 className={`w-full py-3.5 rounded-xl font-bold text-sm uppercase tracking-wide transition-all cursor-pointer ${
                   pack.badge
                     ? "bg-green-900 hover:bg-green-800 text-amber-400 shadow-lg"
@@ -256,7 +255,6 @@ export default function ResellerPack() {
         <a
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("[tvpikoma] Hallo, ik wil graag meer weten over de reseller pakketten.")}`}
           target="_blank" rel="noopener noreferrer"
-          onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
           className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-green-900 font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer shadow-lg"
         >
           <Gift className="w-4 h-4" /> Start als Reseller
@@ -277,6 +275,22 @@ export default function ResellerPack() {
       <footer className="bg-green-900 text-green-300 text-center text-xs py-6">
         <p>© {new Date().getFullYear()} tvpikoma · Premium IPTV voor NL &amp; BE</p>
       </footer>
+
+      {selectedPack && (
+        <CheckoutModal
+          isOpen={checkoutModalOpen}
+          onClose={() => setCheckoutModalOpen(false)}
+          whatsappNumber={WHATSAPP_NUMBER}
+          title={`Reseller aanmelding: ${selectedPack.name}`}
+          orderLines={[
+            { label: "Pakket", value: selectedPack.name },
+            { label: "Credits", value: String(selectedPack.credits) },
+          ]}
+          total={`€${selectedPack.price.toFixed(2).replace(".", ",")}`}
+          baseMessage={`[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${selectedPack.name} pakket* (${selectedPack.credits} credits) voor €${selectedPack.price.toFixed(2).replace(".", ",")}.`}
+          showDeviceField={false}
+        />
+      )}
     </div>
   );
 }

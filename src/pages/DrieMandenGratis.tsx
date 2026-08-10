@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, MessageCircle, Gift, Zap, Shield, Tv, Star } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
+import CheckoutModal from "../components/CheckoutModal";
 
 const getTimeUntilMidnight = () => {
   const now = new Date();
@@ -64,12 +65,9 @@ export default function DrieMandenGratis() {
   const savingsAmount = (originalPrice - price).toFixed(2).replace(".", ",");
   const savingsPct = Math.round(((originalPrice - price) / originalPrice) * 100);
 
-  const openWhatsApp = () => {
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
-    const msg = `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`;
-    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
-  };
+  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
+
+  const baseMessage = `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`;
 
   return (
     <div className="min-h-screen bg-gray-950 font-sans">
@@ -88,7 +86,6 @@ export default function DrieMandenGratis() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
-            onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Activeer Nu
@@ -197,7 +194,7 @@ export default function DrieMandenGratis() {
             </div>
 
             {/* CTA */}
-            <button onClick={openWhatsApp}
+            <button onClick={() => setCheckoutModalOpen(true)}
               className="w-full py-4 rounded-2xl bg-amber-400 hover:bg-yellow-300 text-green-900 font-extrabold text-base uppercase tracking-wide transition-all cursor-pointer shadow-lg shadow-amber-400/20 hover:shadow-amber-400/40 hover:scale-[1.02] active:scale-[0.98]">
               🎁 Activeer 3 Maanden Gratis →
             </button>
@@ -235,6 +232,19 @@ export default function DrieMandenGratis() {
       <footer className="border-t border-white/5 text-white/30 text-center text-xs py-6">
         © 2025 tvpikoma · Premium IPTV voor NL &amp; BE
       </footer>
+
+      <CheckoutModal
+        isOpen={checkoutModalOpen}
+        onClose={() => setCheckoutModalOpen(false)}
+        whatsappNumber={WHATSAPP_NUMBER}
+        title="Bestelling: 🎁 12+3 Maanden Gratis"
+        orderLines={[
+          { label: "Pakket", value: "✦ Premium VIP+ (12+3 Maanden Gratis)" },
+          { label: "Schermen", value: selectedDevices },
+        ]}
+        total={`€${price.toFixed(2).replace(".", ",")}`}
+        baseMessage={baseMessage}
+      />
     </div>
   );
 }
