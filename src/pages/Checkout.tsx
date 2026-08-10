@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ChevronDown, ChevronUp, Lock, Tv } from "lucide-react";
+import { ChevronDown, ChevronUp, Lock, MessageCircle, Tv } from "lucide-react";
 import { useWhatsAppNumber, buildWaMeLink } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META } from "../lib/pageMeta";
 
@@ -8,6 +8,15 @@ export interface CheckoutOrderLine {
   label: string;
   value: string;
 }
+
+type PaymentMethodId = "ideal" | "paypal" | "card" | "bank_transfer";
+
+const PAYMENT_METHODS: { id: PaymentMethodId; label: string; sub: string }[] = [
+  { id: "ideal", label: "iDEAL", sub: "Nederland" },
+  { id: "paypal", label: "PayPal", sub: "" },
+  { id: "card", label: "Creditcard", sub: "Visa / Mastercard" },
+  { id: "bank_transfer", label: "Bankoverschrijving", sub: "" },
+];
 
 export interface CheckoutState {
   title: string;
@@ -25,6 +34,7 @@ export default function Checkout() {
 
   const [device, setDevice] = useState("");
   const [contact, setContact] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethodId>("ideal");
   const [error, setError] = useState("");
   const [summaryOpen, setSummaryOpen] = useState(false);
 
@@ -64,8 +74,11 @@ export default function Checkout() {
       return;
     }
 
+    const paymentLabel = PAYMENT_METHODS.find((m) => m.id === paymentMethod)?.label ?? paymentMethod;
+
     const lines = [order.baseMessage];
     if (showDeviceField) lines.push(`Apparaat: ${trimmedDevice}`);
+    lines.push(`Betaalmethode: ${paymentLabel}`);
     lines.push(`E-mail/Telefoon: ${trimmedContact}`);
 
     window.location.href = buildWaMeLink(whatsappNumber, lines.join("\n"));
@@ -177,6 +190,36 @@ export default function Checkout() {
                 </div>
               )}
 
+              <div>
+                <label className="text-sm font-semibold text-gray-900 block mb-1.5">Betaalmethode</label>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {PAYMENT_METHODS.map((method) => (
+                    <button
+                      key={method.id}
+                      type="button"
+                      onClick={() => setPaymentMethod(method.id)}
+                      className={`text-left p-3 rounded-lg border cursor-pointer transition-colors ${
+                        paymentMethod === method.id
+                          ? "border-green-600 bg-green-50"
+                          : "border-gray-300 bg-white hover:border-gray-400"
+                      }`}
+                    >
+                      <span className="flex items-center gap-2">
+                        <span
+                          className={`w-4 h-4 rounded-full border-2 flex items-center justify-center shrink-0 ${
+                            paymentMethod === method.id ? "border-green-600" : "border-gray-300"
+                          }`}
+                        >
+                          {paymentMethod === method.id && <span className="w-2 h-2 bg-green-600 rounded-full" />}
+                        </span>
+                        <span className="text-sm font-semibold text-gray-900">{method.label}</span>
+                      </span>
+                      {method.sub && <span className="text-xs text-gray-500 block ml-6">{method.sub}</span>}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
               {error && <p className="text-xs text-red-600">{error}</p>}
 
               <button
@@ -189,9 +232,24 @@ export default function Checkout() {
                 Je wordt doorgestuurd naar WhatsApp om je bestelling af te ronden.
               </p>
 
+              <div className="flex gap-3 bg-green-50 border border-green-100 rounded-xl p-4 mt-2">
+                <MessageCircle className="w-4 h-4 text-green-700 shrink-0 mt-0.5" />
+                <div className="text-xs text-green-800 leading-relaxed">
+                  <p className="font-bold text-green-900 mb-1">Geen geïntegreerde checkout — bewust</p>
+                  <p>
+                    Of je nu betaalt via iDEAL, PayPal, kaart of bankoverschrijving: je rondt de betaling zelf af via de gedeelde link of gegevens.
+                    Zodra je hebt betaald, ontvang je je abonnement automatisch.
+                  </p>
+                  <p className="mt-2">
+                    Veel klanten geven dit zelfs de voorkeur: je krijgt je inloggegevens direct via WhatsApp en hebt meteen persoonlijke hulp bij de
+                    installatie — iets wat je mist bij een geautomatiseerde checkout, waar het weleens voorkomt dat je wél betaalt maar niets per e-mail ontvangt.
+                  </p>
+                </div>
+              </div>
+
               <button
                 onClick={() => navigate(-1)}
-                className="text-xs text-gray-500 hover:text-gray-800 flex items-center gap-1 mt-2 cursor-pointer w-fit"
+                className="text-xs text-gray-500 hover:text-gray-800 flex items-center gap-1 mt-1 cursor-pointer w-fit"
               >
                 &larr; Terug
               </button>
