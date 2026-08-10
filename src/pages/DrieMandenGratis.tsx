@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Check, MessageCircle, Gift, Zap, Shield, Tv, Star } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
-import CheckoutModal from "../components/CheckoutModal";
 
 const getTimeUntilMidnight = () => {
   const now = new Date();
@@ -35,6 +34,7 @@ const features = [
 
 export default function DrieMandenGratis() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
+  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnight);
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 
@@ -65,9 +65,19 @@ export default function DrieMandenGratis() {
   const savingsAmount = (originalPrice - price).toFixed(2).replace(".", ",");
   const savingsPct = Math.round(((originalPrice - price) / originalPrice) * 100);
 
-  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-
-  const baseMessage = `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`;
+  const startCheckout = () => {
+    navigate("/afrekenen", {
+      state: {
+        title: "Bestelling: 🎁 12+3 Maanden Gratis",
+        orderLines: [
+          { label: "Pakket", value: "✦ Premium VIP+ (12+3 Maanden Gratis)" },
+          { label: "Schermen", value: selectedDevices },
+        ],
+        total: `€${price.toFixed(2).replace(".", ",")}`,
+        baseMessage: `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`,
+      },
+    });
+  };
 
   return (
     <div className="min-h-screen bg-gray-950 font-sans">
@@ -194,7 +204,7 @@ export default function DrieMandenGratis() {
             </div>
 
             {/* CTA */}
-            <button onClick={() => setCheckoutModalOpen(true)}
+            <button onClick={startCheckout}
               className="w-full py-4 rounded-2xl bg-amber-400 hover:bg-yellow-300 text-green-900 font-extrabold text-base uppercase tracking-wide transition-all cursor-pointer shadow-lg shadow-amber-400/20 hover:shadow-amber-400/40 hover:scale-[1.02] active:scale-[0.98]">
               🎁 Activeer 3 Maanden Gratis →
             </button>
@@ -232,19 +242,6 @@ export default function DrieMandenGratis() {
       <footer className="border-t border-white/5 text-white/30 text-center text-xs py-6">
         © 2025 tvpikoma · Premium IPTV voor NL &amp; BE
       </footer>
-
-      <CheckoutModal
-        isOpen={checkoutModalOpen}
-        onClose={() => setCheckoutModalOpen(false)}
-        whatsappNumber={WHATSAPP_NUMBER}
-        title="Bestelling: 🎁 12+3 Maanden Gratis"
-        orderLines={[
-          { label: "Pakket", value: "✦ Premium VIP+ (12+3 Maanden Gratis)" },
-          { label: "Schermen", value: selectedDevices },
-        ]}
-        total={`€${price.toFixed(2).replace(".", ",")}`}
-        baseMessage={baseMessage}
-      />
     </div>
   );
 }

@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Check, MessageCircle } from "lucide-react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
-import CheckoutModal from "../components/CheckoutModal";
 
 const periods: { id: BillingPeriod; label: string; sub: string; bonus?: boolean }[] = [
   { id: "3_months",         label: "3 Maanden",    sub: "€11,99/maand" },
@@ -29,6 +28,7 @@ const normalPrices: Record<BillingPeriod, Record<string, number>> = {
 
 export default function Abonnementen() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
+  const navigate = useNavigate();
   const [selectedPeriod, setSelectedPeriod] = useState<BillingPeriod>("12_plus_3_months");
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 
@@ -52,12 +52,19 @@ export default function Abonnementen() {
   const periodInfo = PRICING_MAPPING[selectedPeriod];
   const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
 
-  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState<{ plan: "VIP" | "Basis"; price: number } | null>(null);
-
   const startCheckout = (plan: "VIP" | "Basis", price: number) => {
-    setSelectedOrder({ plan, price });
-    setCheckoutModalOpen(true);
+    navigate("/afrekenen", {
+      state: {
+        title: `Bestelling: ${plan === "VIP" ? "Premium VIP+" : "Basis"}`,
+        orderLines: [
+          { label: "Pakket", value: plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
+          { label: "Periode", value: String(periodLabel) },
+          { label: "Schermen", value: selectedDevices },
+        ],
+        total: `€${price.toFixed(2).replace(".", ",")}`,
+        baseMessage: `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`,
+      },
+    });
   };
 
   const vipPrice = vipPrices[selectedPeriod][selectedDevices];
@@ -209,22 +216,6 @@ export default function Abonnementen() {
       <footer className="bg-green-900 text-green-300 text-center text-xs py-6 mt-8">
         <p>© 2025 tvpikoma · Premium IPTV voor NL &amp; BE</p>
       </footer>
-
-      {selectedOrder && (
-        <CheckoutModal
-          isOpen={checkoutModalOpen}
-          onClose={() => setCheckoutModalOpen(false)}
-          whatsappNumber={WHATSAPP_NUMBER}
-          title={`Bestelling: ${selectedOrder.plan === "VIP" ? "Premium VIP+" : "Basis"}`}
-          orderLines={[
-            { label: "Pakket", value: selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
-            { label: "Periode", value: String(periodLabel) },
-            { label: "Schermen", value: selectedDevices },
-          ]}
-          total={`€${selectedOrder.price.toFixed(2).replace(".", ",")}`}
-          baseMessage={`[tvpikoma] Hallo, ik wil het *${selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${selectedOrder.price.toFixed(2).replace(".", ",")}.`}
-        />
-      )}
     </div>
   );
 }

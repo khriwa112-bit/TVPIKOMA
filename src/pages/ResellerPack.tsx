@@ -1,9 +1,8 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Check, MessageCircle, TrendingUp, Key, Users, ShieldCheck, Sparkles, Star, Gift } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setFaqPageSchema, setBreadcrumbSchema } from "../lib/pageMeta";
-import CheckoutModal from "../components/CheckoutModal";
 
 interface CreditPack {
   id: string;
@@ -67,6 +66,7 @@ const faqs = [
 
 export default function ResellerPack() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
+  const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
@@ -88,12 +88,19 @@ export default function ResellerPack() {
     };
   }, []);
 
-  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-  const [selectedPack, setSelectedPack] = useState<CreditPack | null>(null);
-
   const startCheckout = (pack: CreditPack) => {
-    setSelectedPack(pack);
-    setCheckoutModalOpen(true);
+    navigate("/afrekenen", {
+      state: {
+        title: `Reseller aanmelding: ${pack.name}`,
+        orderLines: [
+          { label: "Pakket", value: pack.name },
+          { label: "Credits", value: String(pack.credits) },
+        ],
+        total: `€${pack.price.toFixed(2).replace(".", ",")}`,
+        baseMessage: `[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${pack.name} pakket* (${pack.credits} credits) voor €${pack.price.toFixed(2).replace(".", ",")}.`,
+        showDeviceField: false,
+      },
+    });
   };
 
   const requestTestPanel = () => {
@@ -275,22 +282,6 @@ export default function ResellerPack() {
       <footer className="bg-green-900 text-green-300 text-center text-xs py-6">
         <p>© {new Date().getFullYear()} tvpikoma · Premium IPTV voor NL &amp; BE</p>
       </footer>
-
-      {selectedPack && (
-        <CheckoutModal
-          isOpen={checkoutModalOpen}
-          onClose={() => setCheckoutModalOpen(false)}
-          whatsappNumber={WHATSAPP_NUMBER}
-          title={`Reseller aanmelding: ${selectedPack.name}`}
-          orderLines={[
-            { label: "Pakket", value: selectedPack.name },
-            { label: "Credits", value: String(selectedPack.credits) },
-          ]}
-          total={`€${selectedPack.price.toFixed(2).replace(".", ",")}`}
-          baseMessage={`[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${selectedPack.name} pakket* (${selectedPack.credits} credits) voor €${selectedPack.price.toFixed(2).replace(".", ",")}.`}
-          showDeviceField={false}
-        />
-      )}
     </div>
   );
 }

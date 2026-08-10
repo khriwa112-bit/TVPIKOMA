@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
-import CheckoutModal from "./CheckoutModal";
 
 export default function PricingCalculator() {
-    const whatsappNumber = useWhatsAppNumber();
+  const navigate = useNavigate();
   const [selectedPeriod, setSelectedPeriod] = useState<BillingPeriod>("12_plus_3_months");
 
   const getTimeUntilMidnight = () => {
@@ -21,8 +20,6 @@ export default function PricingCalculator() {
     return () => clearInterval(timer);
   }, []);
   const [selectedDevices, setSelectedDevices] = useState<"1"|"2"|"3"|"4">("1");
-  const [checkoutModalOpen, setCheckoutModalOpen] = useState(false);
-  const [selectedOrder, setSelectedOrder] = useState<{ plan: "VIP" | "Basis"; price: number } | null>(null);
 
   const vipPrices: Record<BillingPeriod, Record<string, number>> = {
     "3_months":        { "1": 34.99, "2": 49.99, "3": 69.99, "4": 89.99 },
@@ -48,8 +45,18 @@ export default function PricingCalculator() {
   const periodLabel = periods.find(p => p.id === selectedPeriod)?.label ?? selectedPeriod;
 
   const startCheckout = (plan: "VIP" | "Basis", price: number) => {
-    setSelectedOrder({ plan, price });
-    setCheckoutModalOpen(true);
+    navigate("/afrekenen", {
+      state: {
+        title: `Bestelling: ${plan === "VIP" ? "Premium VIP+" : "Basis"}`,
+        orderLines: [
+          { label: "Pakket", value: plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
+          { label: "Periode", value: String(periodLabel) },
+          { label: "Schermen", value: selectedDevices },
+        ],
+        total: `€${price.toFixed(2).replace(".", ",")}`,
+        baseMessage: `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`,
+      },
+    });
   };
 
   return (
@@ -258,22 +265,6 @@ export default function PricingCalculator() {
         </div>
 
       </div>
-
-      {selectedOrder && (
-        <CheckoutModal
-          isOpen={checkoutModalOpen}
-          onClose={() => setCheckoutModalOpen(false)}
-          whatsappNumber={whatsappNumber}
-          title={`Bestelling: ${selectedOrder.plan === "VIP" ? "Premium VIP+" : "Basis"}`}
-          orderLines={[
-            { label: "Pakket", value: selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
-            { label: "Periode", value: String(periodLabel) },
-            { label: "Schermen", value: selectedDevices },
-          ]}
-          total={`€${selectedOrder.price.toFixed(2).replace(".", ",")}`}
-          baseMessage={`[tvpikoma] Hallo, ik wil het *${selectedOrder.plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${selectedOrder.price.toFixed(2).replace(".", ",")}.`}
-        />
-      )}
     </section>
   );
 }
