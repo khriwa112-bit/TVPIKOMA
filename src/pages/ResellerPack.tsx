@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Check, MessageCircle, TrendingUp, Key, Users, ShieldCheck, Sparkles, Star, Gift } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setFaqPageSchema, setBreadcrumbSchema } from "../lib/pageMeta";
@@ -66,7 +66,6 @@ const faqs = [
 
 export default function ResellerPack() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
-  const navigate = useNavigate();
   const [openFaq, setOpenFaq] = useState<number | null>(0);
 
   useEffect(() => {
@@ -89,18 +88,8 @@ export default function ResellerPack() {
   }, []);
 
   const startCheckout = (pack: CreditPack) => {
-    navigate("/afrekenen", {
-      state: {
-        title: `Reseller aanmelding: ${pack.name}`,
-        orderLines: [
-          { label: "Pakket", value: pack.name },
-          { label: "Credits", value: String(pack.credits) },
-        ],
-        total: `€${pack.price.toFixed(2).replace(".", ",")}`,
-        baseMessage: `[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${pack.name} pakket* (${pack.credits} credits) voor €${pack.price.toFixed(2).replace(".", ",")}.`,
-        showDeviceField: false,
-      },
-    });
+    const msg = `[tvpikoma] Hallo, ik wil me aanmelden als reseller met het *${pack.name} pakket* (${pack.credits} credits) voor €${pack.price.toFixed(2).replace(".", ",")}.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
   const requestTestPanel = () => {

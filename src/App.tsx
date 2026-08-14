@@ -3,7 +3,6 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Abonnementen from "./pages/Abonnementen";
 import DrieMandenGratis from "./pages/DrieMandenGratis";
 import ResellerPack from "./pages/ResellerPack";
-import Checkout from "./pages/Checkout";
 import { BlogList, BlogPostPage } from "./components/Blog";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
@@ -37,8 +36,6 @@ export default function App() {
   const handleWhatsappWidgetSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!widgetMsg.trim()) return;
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' });
-    (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' });
     const cleanMsg = encodeURIComponent(`[tvpikoma] ${widgetMsg}`);
     window.open(`https://wa.me/${whatsappNumber}?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
     setWidgetMsg("");
@@ -151,7 +148,6 @@ export default function App() {
       <Route path="/3-maanden-gratis" element={<DrieMandenGratis />} />
       <Route path="/3maanden-Gratis" element={<Navigate to="/3-maanden-gratis" replace />} />
       <Route path="/reseller-pakket" element={<ResellerPack />} />
-      <Route path="/afrekenen" element={<Checkout />} />
       <Route path="/blog" element={<BlogList />} />
       <Route path="/blog/:slug" element={<BlogPostPage />} />
     </Routes>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Check, MessageCircle, Gift, Zap, Shield, Tv, Star } from "lucide-react";
 import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
@@ -34,7 +34,6 @@ const features = [
 
 export default function DrieMandenGratis() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
-  const navigate = useNavigate();
   const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnight);
   const [selectedDevices, setSelectedDevices] = useState<"1" | "2" | "3" | "4">("1");
 
@@ -66,17 +65,8 @@ export default function DrieMandenGratis() {
   const savingsPct = Math.round(((originalPrice - price) / originalPrice) * 100);
 
   const startCheckout = () => {
-    navigate("/afrekenen", {
-      state: {
-        title: "Bestelling: 🎁 12+3 Maanden Gratis",
-        orderLines: [
-          { label: "Pakket", value: "✦ Premium VIP+ (12+3 Maanden Gratis)" },
-          { label: "Schermen", value: selectedDevices },
-        ],
-        total: `€${price.toFixed(2).replace(".", ",")}`,
-        baseMessage: `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`,
-      },
-    });
+    const msg = `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
   return (

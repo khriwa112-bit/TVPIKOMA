@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
+import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
 
 export default function PricingCalculator() {
-  const navigate = useNavigate();
+  const WHATSAPP_NUMBER = useWhatsAppNumber();
   const [selectedPlan, setSelectedPlan] = useState<"Basis" | "VIP">("Basis");
 
   const getTimeUntilMidnight = () => {
@@ -41,18 +41,8 @@ export default function PricingCalculator() {
   ];
 
   const startCheckout = (plan: "VIP" | "Basis", price: number, periodLabel: string) => {
-    navigate("/afrekenen", {
-      state: {
-        title: `Bestelling: ${plan === "VIP" ? "Premium VIP+" : "Basis"}`,
-        orderLines: [
-          { label: "Pakket", value: plan === "VIP" ? "✦ Premium VIP+" : "Basis" },
-          { label: "Periode", value: periodLabel },
-          { label: "Schermen", value: selectedDevices },
-        ],
-        total: `€${price.toFixed(2).replace(".", ",")}`,
-        baseMessage: `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`,
-      },
-    });
+    const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
+    window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
   const vipFeatures = [
