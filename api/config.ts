@@ -14,7 +14,7 @@ export default async function handler(req: any, res: any) {
 
   let whatsappNumber = FALLBACK_WHATSAPP_NUMBER;
   try {
-    const value = await get('swivtvappkhder_whatsappNumber');
+    const value = await get('tvpikoma_whatsappNumber');
     if (typeof value === 'string' && /^\d{8,15}$/.test(value)) {
       whatsappNumber = value;
     }
