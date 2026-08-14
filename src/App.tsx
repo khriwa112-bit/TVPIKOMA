@@ -14,6 +14,7 @@ import FAQ from "./components/FAQ";
 import ResellerModal from "./components/ResellerModal";
 import Footer from "./components/Footer";
 import SportCategories from "./components/SportCategories";
+import SportsAndEntertainment from "./components/SportsAndEntertainment";
 import { MessageSquare, Phone, X, Send, ShieldAlert, Sparkles, Check } from "lucide-react";
 import { useWhatsAppNumber } from "../contexts/WhatsAppContext";
 
@@ -59,6 +60,9 @@ export default function App() {
 
         {/* Sport categories section like live site */}
         <SportCategories />
+
+        {/* Dynamic sport events, Dutch local movies, and shows switcher tabs */}
+        <SportsAndEntertainment />
 
         {/* Live calculating dynamic custom billing plan pricing widget */}
         <PricingCalculator />
