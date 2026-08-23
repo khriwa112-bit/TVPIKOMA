@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Helvetica Neue", Helvetica, Arial, ui-sans-serif, system-ui, sans-serif;
-  --font-display: "DynaPuff", cursive;
-  --font-mono: "Sour Gummy", cursive;
+  --font-sans: "Baloo Da 2", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Righteous", cursive;
+  --font-mono: "Baloo Da 2", ui-sans-serif, system-ui, sans-serif;
 
   --color-primary-50: #f0fdf4;
   --color-primary-100: #dcfce7;

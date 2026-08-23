@@ -207,8 +207,7 @@ export default function PricingCalculator() {
                 </p>
                 <div className="mb-4">
                   <span onClick={() => startCheckout(isVip ? "VIP" : "Basis", price, p.label)}
-                    className={`text-5xl font-black text-green-900 cursor-pointer hover:text-green-700 transition-colors ${isVip ? "font-display" : ""}`}
-                    style={!isVip ? { fontFamily: "'Sour Gummy', cursive" } : undefined}>
+                    className="text-5xl font-black font-display text-green-900 cursor-pointer hover:text-green-700 transition-colors">
                     €{price.toFixed(2).replace(".",",")}
                   </span>
                 </div>
