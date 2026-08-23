@@ -6,6 +6,7 @@ import ResellerPack from "./pages/ResellerPack";
 import { BlogList, BlogPostPage } from "./components/Blog";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
+import ChannelSearch from "./components/ChannelSearch";
 import PricingCalculator from "./components/PricingCalculator";
 import Advantages from "./components/Advantages";
 import WhatsAppReviews from "./components/WhatsAppReviews";
@@ -57,6 +58,9 @@ export default function App() {
         
         {/* Core Hero Pitch */}
         <Hero onScrollTo={handleScrollTo} />
+
+        {/* Channel logos showcase, linked from "Kanalen" in the nav */}
+        <ChannelSearch />
 
         {/* Sport categories section like live site */}
         <SportCategories />
