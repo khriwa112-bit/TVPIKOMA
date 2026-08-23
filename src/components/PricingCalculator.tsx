@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 export default function PricingCalculator() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
@@ -42,6 +42,7 @@ export default function PricingCalculator() {
 
   const startCheckout = (plan: "VIP" | "Basis", price: number, periodLabel: string) => {
     const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
+    trackWhatsAppConversion();
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 

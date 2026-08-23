@@ -17,7 +17,7 @@ import Footer from "./components/Footer";
 import SportCategories from "./components/SportCategories";
 import SportsAndEntertainment from "./components/SportsAndEntertainment";
 import { MessageSquare, Phone, X, Send, ShieldAlert, Sparkles, Check } from "lucide-react";
-import { useWhatsAppNumber } from "../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../contexts/WhatsAppContext";
 
 export default function App() {
     const whatsappNumber = useWhatsAppNumber();
@@ -39,6 +39,7 @@ export default function App() {
     e.preventDefault();
     if (!widgetMsg.trim()) return;
     const cleanMsg = encodeURIComponent(`[tvpikoma] ${widgetMsg}`);
+    trackWhatsAppConversion();
     window.open(`https://wa.me/${whatsappNumber}?text=${cleanMsg}`, "_blank", "noopener,noreferrer");
     setWidgetMsg("");
     setWhatsappWidgetOpen(false);

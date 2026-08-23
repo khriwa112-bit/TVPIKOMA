@@ -1,6 +1,6 @@
 import { Mail, Phone, ShieldCheck } from "lucide-react";
 import { Link } from "react-router-dom";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 interface FooterProps {
   onScrollTo: (selector: string) => void;
@@ -66,8 +66,7 @@ export default function Footer({ onScrollTo, onOpenReseller }: FooterProps) {
                 className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">
                 <ShieldCheck className="w-4 h-4 shrink-0" /> Reseller Pakketten
               </Link>
-              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"
-                onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
+              <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" onClick={trackWhatsAppConversion}
                 className="flex items-center gap-2 text-green-300 hover:text-amber-400 transition-colors">
                 <Phone className="w-4 h-4 shrink-0" /> WhatsApp 24/7 Support
               </a>

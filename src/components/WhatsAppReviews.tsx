@@ -1,5 +1,5 @@
 import { MessageSquare } from "lucide-react";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 const ROW1 = Array.from({ length: 7 }, (_, i) => `/assets/reviews/chat-${i + 1}.png`);
 const ROW2 = Array.from({ length: 3 }, (_, i) => `/assets/reviews/chat-${i + 8}.png`);
@@ -67,8 +67,7 @@ export default function WhatsAppReviews() {
         <p className="text-xs text-green-200 mb-4 inline-flex items-center gap-1.5 justify-center">
           <MessageSquare className="w-4 h-4" /> Heb je zelf een vraag en wil je live met support praten?
         </p><br />
-        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"
-          onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
+        <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" onClick={trackWhatsAppConversion}
           className="inline-flex items-center gap-2 px-6 py-3.5 rounded-xl bg-amber-400 text-green-900 hover:bg-amber-500 font-bold text-xs tracking-wide transition-all uppercase shadow-lg">
           Start WhatsApp Chat &rarr;
         </a>

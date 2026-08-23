@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Check, MessageCircle, Gift, Zap, Shield, Tv, Star } from "lucide-react";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
 
 const getTimeUntilMidnight = () => {
@@ -66,6 +66,7 @@ export default function DrieMandenGratis() {
 
   const startCheckout = () => {
     const msg = `[tvpikoma] Hallo, ik wil de *🎁 12+3 MAANDEN GRATIS* actie bestellen. ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")} totaal.`;
+    trackWhatsAppConversion();
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
@@ -86,6 +87,7 @@ export default function DrieMandenGratis() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
+            onClick={trackWhatsAppConversion}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-400 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Activeer Nu

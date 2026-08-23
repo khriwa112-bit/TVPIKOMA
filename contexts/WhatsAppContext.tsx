@@ -30,3 +30,17 @@ export const buildWaMeLink = (number: string, message?: string): string =>
   message ? `https://wa.me/${number}?text=${encodeURIComponent(message)}` : `https://wa.me/${number}`;
 
 export const buildTelLink = (number: string): string => `tel:+${number}`;
+
+declare global {
+  interface Window {
+    gtag?: (...args: unknown[]) => void;
+  }
+}
+
+// Fires the Google Ads conversion event for a WhatsApp click. Call this
+// wherever a WhatsApp link/button is used, right before the chat opens.
+export const trackWhatsAppConversion = (): void => {
+  if (typeof window !== 'undefined' && typeof window.gtag === 'function') {
+    window.gtag('event', 'conversion', { send_to: 'AW-18387716445/veU1CJuB2OYcEN2S-b9E' });
+  }
+};

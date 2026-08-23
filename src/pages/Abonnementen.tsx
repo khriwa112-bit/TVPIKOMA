@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { Check, MessageCircle } from "lucide-react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
 
 const periods: { id: BillingPeriod; label: string; sub: string; bonus?: boolean }[] = [
@@ -53,6 +53,7 @@ export default function Abonnementen() {
 
   const startCheckout = (plan: "VIP" | "Basis", price: number) => {
     const msg = `[tvpikoma] Hallo, ik wil het *${plan === "VIP" ? "✦ Premium VIP+" : "Basis"}* pakket bestellen. ${periodLabel}, ${selectedDevices} scherm(en), €${price.toFixed(2).replace(".", ",")}.`;
+    trackWhatsAppConversion();
     window.open(`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
   };
 
@@ -74,6 +75,7 @@ export default function Abonnementen() {
           <a
             href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank" rel="noopener noreferrer"
+            onClick={trackWhatsAppConversion}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Bestel via WhatsApp

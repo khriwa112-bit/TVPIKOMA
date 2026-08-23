@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FAQ_DATA } from "../data";
 import { HelpCircle, ChevronRight, MessageCircle } from "lucide-react";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 export default function FAQ() {
     const whatsappNumber = useWhatsAppNumber();
@@ -36,8 +36,7 @@ export default function FAQ() {
             <MessageCircle className="w-5 h-5 text-green-600 shrink-0" />
             <p className="text-xs text-green-600">Heb je een specifieke vraag? Stuur ons direct een WhatsApp-bericht.</p>
           </div>
-          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer"
-            onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }}
+          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" onClick={trackWhatsAppConversion}
             className="px-5 py-2.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-green-900 font-bold text-xs tracking-wide whitespace-nowrap text-center transition-colors">
             Stel via WhatsApp
           </a>

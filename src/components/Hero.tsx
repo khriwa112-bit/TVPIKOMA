@@ -1,6 +1,6 @@
 import { motion } from "motion/react";
 import { Play, ShieldCheck, Gift, ArrowRight, Phone, CreditCard } from "lucide-react";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 interface HeroProps {
   onScrollTo: (selector: string) => void;
@@ -46,7 +46,7 @@ export default function Hero({ onScrollTo }: HeroProps) {
                   Bekijk prijzen
                 </button>
                 <div className="border-t border-green-100" />
-                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" onClick={() => { (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18248577419/JxmtCMb6zcIcEIvjzP1D' }); (window as any).gtag?.('event', 'conversion', { 'send_to': 'AW-18216148215/PgwDCMy-zskcEPe5ke5D' }); }} className="flex items-center justify-between text-green-900 hover:opacity-80 transition-opacity group">
+                <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" onClick={trackWhatsAppConversion} className="flex items-center justify-between text-green-900 hover:opacity-80 transition-opacity group">
                   <div className="flex items-center gap-2">
                     <div className="w-7 h-7 rounded-full bg-green-100 border border-green-200 flex items-center justify-center">
                       <Phone className="w-3 h-3 text-green-700" />

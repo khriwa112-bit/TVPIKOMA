@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link, useParams, Navigate } from "react-router-dom";
 import { MessageCircle, ArrowLeft, ExternalLink } from "lucide-react";
-import { useWhatsAppNumber } from "../../contexts/WhatsAppContext";
+import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 import { applyPageMeta, DEFAULT_PAGE_META, setBreadcrumbSchema } from "../lib/pageMeta";
 
 type BlogBlock =
@@ -180,9 +180,8 @@ export const BLOG_POSTS: BlogPost[] = [
 ];
 
 function openBlogWhatsApp(whatsappNumber: string, postTitle: string) {
-  (window as any).gtag?.("event", "conversion", { send_to: "AW-18248577419/JxmtCMb6zcIcEIvjzP1D" });
-  (window as any).gtag?.("event", "conversion", { send_to: "AW-18216148215/PgwDCMy-zskcEPe5ke5D" });
   const msg = `[tvpikoma] Hoi, ik las het blogartikel "${postTitle}" en heb nog een vraag.`;
+  trackWhatsAppConversion();
   window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(msg)}`, "_blank", "noopener,noreferrer");
 }
 
@@ -198,10 +197,7 @@ function BlogShellHeader({ whatsappNumber }: { whatsappNumber: string }) {
           <a
             href={`https://wa.me/${whatsappNumber}`}
             target="_blank" rel="noopener noreferrer"
-            onClick={() => {
-              (window as any).gtag?.("event", "conversion", { send_to: "AW-18248577419/JxmtCMb6zcIcEIvjzP1D" });
-              (window as any).gtag?.("event", "conversion", { send_to: "AW-18216148215/PgwDCMy-zskcEPe5ke5D" });
-            }}
+            onClick={trackWhatsAppConversion}
             className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold px-4 py-2 rounded-lg transition-colors"
           >
             <MessageCircle className="w-4 h-4" /> Bestel via WhatsApp
