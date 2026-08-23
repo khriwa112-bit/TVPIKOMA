@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-export const FALLBACK_WHATSAPP_NUMBER = '447449708976';
+export const FALLBACK_WHATSAPP_NUMBER = '447414662070';
 
 const WhatsAppContext = createContext<string>(FALLBACK_WHATSAPP_NUMBER);
 
