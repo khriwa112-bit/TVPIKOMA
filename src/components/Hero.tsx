@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Play, ShieldCheck, Gift, ArrowRight, Phone, CreditCard, Tv, Film, Trophy } from "lucide-react";
+import { Gift, ArrowRight, Phone, CreditCard, Tv, Film, Trophy } from "lucide-react";
 import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 interface HeroProps {
@@ -127,19 +127,15 @@ export default function Hero({ onScrollTo }: HeroProps) {
               <div className="text-xs text-green-200 mt-1 tracking-wide">Sport &amp; Events</div>
             </div>
           </div>
-        </motion.div>
-
-        {/* Badges */}
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-wrap items-center gap-6 mt-6">
-          <div className="flex items-center gap-2 text-green-100 text-sm">
-            <Play className="w-4 h-4 text-emerald-300 fill-emerald-300" /><span>Instant Activering</span>
-          </div>
-          <div className="flex items-center gap-2 text-green-100 text-sm">
-            <ShieldCheck className="w-4 h-4 text-emerald-300" /><span>Geen Buffering</span>
-          </div>
-          <div className="flex items-center gap-2 text-green-100 text-sm">
-            <CreditCard className="w-4 h-4 text-emerald-300" /><span>Betalen met iDEAL</span>
+          <div className="hidden sm:block w-px h-11 bg-white/10" />
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center shrink-0">
+              <CreditCard className="w-5 h-5 text-emerald-300" />
+            </div>
+            <div>
+              <div className="text-2xl font-black font-display leading-none">iDEAL</div>
+              <div className="text-xs text-green-200 mt-1 tracking-wide">Veilig Betalen</div>
+            </div>
           </div>
         </motion.div>
       </div>
