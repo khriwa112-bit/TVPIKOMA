@@ -1,5 +1,5 @@
 import { motion } from "motion/react";
-import { Play, ShieldCheck, Gift, ArrowRight, Phone, CreditCard } from "lucide-react";
+import { Play, ShieldCheck, Gift, ArrowRight, Phone, CreditCard, Tv, Film, Trophy } from "lucide-react";
 import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
 
 interface HeroProps {
@@ -78,6 +78,23 @@ export default function Hero({ onScrollTo }: HeroProps) {
           className="text-green-100 text-base sm:text-lg max-w-lg leading-relaxed mb-6">
           TV kijken zoals het hoort. Pauzeer of annuleer op elk moment.
         </motion.p>
+
+        {/* Stat badges */}
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
+          className="flex flex-wrap items-center gap-3 mb-8">
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+            <Tv className="w-4 h-4 text-emerald-300 shrink-0" />
+            <span className="text-sm text-white"><strong className="font-black">80.000+</strong> Kanalen</span>
+          </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+            <Film className="w-4 h-4 text-emerald-300 shrink-0" />
+            <span className="text-sm text-white"><strong className="font-black">280.000+</strong> VOD</span>
+          </div>
+          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
+            <Trophy className="w-4 h-4 text-emerald-300 shrink-0" />
+            <span className="text-sm text-white font-black">Exclusieve Events</span>
+          </div>
+        </motion.div>
 
         {/* Buttons */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
