@@ -79,23 +79,6 @@ export default function Hero({ onScrollTo }: HeroProps) {
           TV kijken zoals het hoort. Pauzeer of annuleer op elk moment.
         </motion.p>
 
-        {/* Stat badges */}
-        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.25 }}
-          className="flex flex-wrap items-center gap-3 mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
-            <Tv className="w-4 h-4 text-emerald-300 shrink-0" />
-            <span className="text-sm text-white"><strong className="font-black">80.000+</strong> Kanalen</span>
-          </div>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
-            <Film className="w-4 h-4 text-emerald-300 shrink-0" />
-            <span className="text-sm text-white"><strong className="font-black">280.000+</strong> VOD</span>
-          </div>
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm">
-            <Trophy className="w-4 h-4 text-emerald-300 shrink-0" />
-            <span className="text-sm text-white font-black">Exclusieve Events</span>
-          </div>
-        </motion.div>
-
         {/* Buttons */}
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-0">
@@ -110,6 +93,40 @@ export default function Hero({ onScrollTo }: HeroProps) {
             <span className="relative">Claim mijn <span className="underline">3 maanden</span> bonus</span>
             <ArrowRight className="w-5 h-5 relative group-hover:translate-x-1 transition-transform" />
           </button>
+        </motion.div>
+
+        {/* Stat badges */}
+        <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.4 }}
+          className="flex flex-wrap items-center gap-x-10 gap-y-5 mt-10 pt-8 border-t border-white/10">
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center shrink-0">
+              <Tv className="w-5 h-5 text-emerald-300" />
+            </div>
+            <div>
+              <div className="text-2xl font-black font-display leading-none">80.000+</div>
+              <div className="text-xs text-green-200 mt-1 tracking-wide">Kanalen</div>
+            </div>
+          </div>
+          <div className="hidden sm:block w-px h-11 bg-white/10" />
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-emerald-400/15 border border-emerald-400/30 flex items-center justify-center shrink-0">
+              <Film className="w-5 h-5 text-emerald-300" />
+            </div>
+            <div>
+              <div className="text-2xl font-black font-display leading-none">280.000+</div>
+              <div className="text-xs text-green-200 mt-1 tracking-wide">Films &amp; Series</div>
+            </div>
+          </div>
+          <div className="hidden sm:block w-px h-11 bg-white/10" />
+          <div className="flex items-center gap-3">
+            <div className="w-11 h-11 rounded-2xl bg-amber-400/15 border border-amber-400/30 flex items-center justify-center shrink-0">
+              <Trophy className="w-5 h-5 text-amber-300" />
+            </div>
+            <div>
+              <div className="text-2xl font-black font-display leading-none">Exclusief</div>
+              <div className="text-xs text-green-200 mt-1 tracking-wide">Sport &amp; Events</div>
+            </div>
+          </div>
         </motion.div>
 
         {/* Badges */}
