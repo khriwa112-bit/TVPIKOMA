@@ -157,7 +157,7 @@ export default function Abonnementen() {
               ))}
             </div>
             <button onClick={() => startCheckout("VIP", vipPrice)}
-              className="w-full py-3.5 rounded-xl bg-green-900 hover:bg-green-800 text-amber-400 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer shadow-lg">
+              className="w-full py-3.5 rounded-full bg-green-900 hover:bg-green-800 text-amber-400 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer shadow-lg">
               Bestel Nu via WhatsApp →
             </button>
           </div>
@@ -176,7 +176,7 @@ export default function Abonnementen() {
               ))}
             </div>
             <button onClick={() => startCheckout("Basis", normalPrice)}
-              className="w-full py-3.5 rounded-xl bg-green-50 hover:bg-green-100 border border-green-300 text-green-800 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer">
+              className="w-full py-3.5 rounded-full bg-green-50 hover:bg-green-100 border border-green-300 text-green-800 font-bold text-sm uppercase tracking-wide transition-all cursor-pointer">
               Bestel Nu via WhatsApp →
             </button>
           </div>

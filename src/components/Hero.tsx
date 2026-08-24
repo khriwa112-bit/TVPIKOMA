@@ -83,7 +83,7 @@ export default function Hero({ onScrollTo }: HeroProps) {
         <motion.div initial={{ opacity: 0, y: 15 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: 0.3 }}
           className="flex flex-col sm:flex-row items-stretch sm:items-center gap-4 mb-0">
           <button onClick={() => onScrollTo("#pricing-section")}
-            className="px-10 py-5 rounded-full text-green-900 bg-amber-400 hover:bg-amber-500 transition-all hover:scale-[1.02] shadow-xl text-center cursor-pointer text-lg font-black">
+            className="px-10 py-5 rounded-full text-green-900 bg-white hover:bg-green-50 transition-all hover:scale-[1.02] shadow-xl text-center cursor-pointer text-lg font-black">
             Bekijk prijzen
           </button>
           <button onClick={() => onScrollTo("#pricing-section")}

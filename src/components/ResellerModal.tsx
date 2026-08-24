@@ -60,7 +60,7 @@ export default function ResellerModal({ isOpen, onClose }: ResellerModalProps) {
                         </select>
                       </div>
                       <button type="submit" disabled={isSubmitting}
-                        className="w-full mt-3 py-3 rounded-xl bg-amber-400 text-green-900 hover:bg-amber-500 font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-1.5 disabled:opacity-50 transition-all cursor-pointer">
+                        className="w-full mt-3 py-3 rounded-full bg-green-900 text-white hover:bg-green-800 font-extrabold text-xs tracking-wider uppercase flex items-center justify-center gap-1.5 disabled:opacity-50 transition-all cursor-pointer">
                         {isSubmitting?"Versturen...":<><Send className="w-3.5 h-3.5"/><span>Aanvraag versturen</span></>}
                       </button>
                     </form>

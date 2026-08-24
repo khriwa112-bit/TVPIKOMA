@@ -59,7 +59,7 @@ export default function SetupWizard() {
               </div>
             </div>
             <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noreferrer" onClick={trackWhatsAppConversion}
-              className="mt-6 py-3.5 rounded-xl bg-amber-400 hover:bg-amber-500 text-green-900 font-bold text-xs tracking-wide text-center uppercase shadow-lg block transition-colors">
+              className="mt-6 py-3.5 rounded-full bg-green-900 hover:bg-green-800 text-white font-bold text-xs tracking-wide text-center uppercase shadow-lg block transition-colors">
               Vraag hulp gratis aan
             </a>
           </div>

@@ -197,7 +197,7 @@ export default function DrieMandenGratis() {
 
             {/* CTA */}
             <button onClick={startCheckout}
-              className="w-full py-4 rounded-2xl bg-amber-400 hover:bg-yellow-300 text-green-900 font-extrabold text-base uppercase tracking-wide transition-all cursor-pointer shadow-lg shadow-amber-400/20 hover:shadow-amber-400/40 hover:scale-[1.02] active:scale-[0.98]">
+              className="w-full py-4 rounded-full bg-white hover:bg-green-50 text-green-900 font-extrabold text-base uppercase tracking-wide transition-all cursor-pointer shadow-lg hover:scale-[1.02] active:scale-[0.98]">
               🎁 Activeer 3 Maanden Gratis →
             </button>
             <p className="text-center text-xs text-white/30 mt-3">Direct actief · Geen contract · Anoniem betalen</p>

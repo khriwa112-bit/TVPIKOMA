@@ -232,7 +232,7 @@ export default function PricingCalculator() {
                 </div>
 
                 <button onClick={() => startCheckout(isVip ? "VIP" : "Basis", price, p.label)}
-                  className={`w-full py-3.5 rounded-xl font-bold text-sm uppercase tracking-wide transition-all cursor-pointer mt-auto ${
+                  className={`w-full py-3.5 rounded-full font-bold text-sm uppercase tracking-wide transition-all cursor-pointer mt-auto ${
                     isVip
                       ? "bg-green-900 hover:bg-green-800 text-amber-400 shadow-lg"
                       : "bg-green-50 hover:bg-green-100 border border-green-300 text-green-800"

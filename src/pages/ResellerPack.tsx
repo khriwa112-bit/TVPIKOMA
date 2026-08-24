@@ -255,7 +255,7 @@ export default function ResellerPack() {
           href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent("[tvpikoma] Hallo, ik wil graag meer weten over de reseller pakketten.")}`}
           target="_blank" rel="noopener noreferrer"
           onClick={trackWhatsAppConversion}
-          className="inline-flex items-center gap-2 bg-amber-400 hover:bg-amber-300 text-green-900 font-extrabold text-sm px-6 py-3.5 rounded-xl transition-all cursor-pointer shadow-lg"
+          className="inline-flex items-center gap-2 bg-white hover:bg-green-50 text-green-900 font-extrabold text-sm px-6 py-3.5 rounded-full transition-all cursor-pointer shadow-lg"
         >
           <Gift className="w-4 h-4" /> Start als Reseller
         </a>

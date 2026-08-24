@@ -1,19 +1,46 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: "Baloo Da 2", ui-sans-serif, system-ui, sans-serif;
-  --font-display: "Righteous", cursive;
-  --font-mono: "Baloo Da 2", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Sora", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "Sora", ui-sans-serif, system-ui, sans-serif;
 
-  --color-primary-50: #f0fdf4;
-  --color-primary-100: #dcfce7;
-  --color-primary-500: #22c55e;
-  --color-primary-600: #16a34a;
-  --color-primary-700: #15803d;
+  --color-primary-50: #f6f5fe;
+  --color-primary-100: #ede9fc;
+  --color-primary-500: #8b79ea;
+  --color-primary-600: #6c5ae7;
+  --color-primary-700: #5b47e0;
 
   --color-dark-bg: #ffffff;
-  --color-dark-surface: #f0fdf4;
-  --color-dark-card: #f0fdf4;
+  --color-dark-surface: #f6f5fe;
+  --color-dark-card: #f6f5fe;
+
+  /* Odido-inspired palette: near-black + indigo/violet, replacing the old
+     forest-green scale. "green" and "emerald" are remapped together since
+     the components use them interchangeably as one brand color. */
+  --color-green-50: #f6f5fe;
+  --color-green-100: #ede9fc;
+  --color-green-200: #dad3f8;
+  --color-green-300: #c0b4f2;
+  --color-green-400: #a99bee;
+  --color-green-500: #8b79ea;
+  --color-green-600: #6c5ae7;
+  --color-green-700: #5b47e0;
+  --color-green-800: #2e2860;
+  --color-green-900: #14122a;
+  --color-green-950: #0a0912;
+
+  --color-emerald-50: #f6f5fe;
+  --color-emerald-100: #ede9fc;
+  --color-emerald-200: #dad3f8;
+  --color-emerald-300: #c0b4f2;
+  --color-emerald-400: #a99bee;
+  --color-emerald-500: #8b79ea;
+  --color-emerald-600: #6c5ae7;
+  --color-emerald-700: #5b47e0;
+  --color-emerald-800: #2e2860;
+  --color-emerald-900: #14122a;
+  --color-emerald-950: #0a0912;
 }
 
 @layer utilities {

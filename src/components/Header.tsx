@@ -107,7 +107,7 @@ export default function Header({ onScrollTo, onOpenReseller }: HeaderProps) {
           {/* Right actions */}
           <div className="hidden md:flex items-center gap-3 pl-6">
             <button onClick={() => onScrollTo("#pricing-section")}
-              className="px-5 py-2 rounded-lg text-green-900 bg-amber-400 hover:bg-amber-500 font-bold text-xs tracking-wide transition-all hover:scale-[1.02] cursor-pointer shadow-sm">
+              className="px-5 py-2 rounded-full text-white bg-green-900 hover:bg-green-800 font-bold text-xs tracking-wide transition-all hover:scale-[1.02] cursor-pointer shadow-sm">
               Bekijk prijzen
             </button>
           </div>
@@ -152,7 +152,7 @@ export default function Header({ onScrollTo, onOpenReseller }: HeaderProps) {
                 🎁 3 Maanden Gratis
               </Link>
               <button onClick={() => { setMobileMenuOpen(false); onScrollTo("#pricing-section"); }}
-                className="w-full mt-2 py-3 rounded-lg bg-amber-400 text-green-900 font-bold">
+                className="w-full mt-2 py-3 rounded-full bg-green-900 text-white font-bold">
                 Bekijk Prijzen
               </button>
             </motion.div>
