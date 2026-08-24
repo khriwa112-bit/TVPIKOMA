@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { PRICING_MAPPING } from "../data";
 import { BillingPeriod } from "../types";
 import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/WhatsAppContext";
@@ -6,19 +6,6 @@ import { useWhatsAppNumber, trackWhatsAppConversion } from "../../contexts/Whats
 export default function PricingCalculator() {
   const WHATSAPP_NUMBER = useWhatsAppNumber();
   const [selectedPlan, setSelectedPlan] = useState<"Basis" | "VIP">("Basis");
-
-  const getTimeUntilMidnight = () => {
-    const now = new Date();
-    const midnight = new Date(now);
-    midnight.setHours(24, 0, 0, 0);
-    const diff = Math.floor((midnight.getTime() - now.getTime()) / 1000);
-    return { hours: Math.floor(diff / 3600), minutes: Math.floor((diff % 3600) / 60), seconds: diff % 60 };
-  };
-  const [timeLeft, setTimeLeft] = useState(getTimeUntilMidnight);
-  useEffect(() => {
-    const timer = setInterval(() => setTimeLeft(getTimeUntilMidnight()), 1000);
-    return () => clearInterval(timer);
-  }, []);
   const [selectedDevices, setSelectedDevices] = useState<"1"|"2"|"3"|"4">("1");
 
   const vipPrices: Record<BillingPeriod, Record<string, number>> = {
@@ -93,35 +80,6 @@ export default function PricingCalculator() {
             Het is <span className="text-white font-bold italic">"je gaat nooit meer terug"</span> beter.<br />
             <span className="text-green-200 text-sm sm:text-base font-normal">tvpikoma vervangt dure Ziggo-pakketten en meerdere streamingdiensten voor één vaste prijs.</span>
           </p>
-
-          {/* Countdown timer */}
-          <div className="inline-block bg-white/10 backdrop-blur border border-white/20 rounded-2xl px-8 py-6 shadow-md">
-            <div className="flex items-center gap-2 justify-center mb-5">
-              <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-              <span className="text-[11px] font-bold uppercase tracking-widest text-green-200 font-sans">
-                Beperkte aanbieding eindigt om middernacht
-              </span>
-            </div>
-            <div className="flex items-center justify-center gap-4">
-              {[
-                { val: timeLeft.hours,   label: "UREN"     },
-                { val: timeLeft.minutes, label: "MINUTEN"  },
-                { val: timeLeft.seconds, label: "SECONDEN" },
-              ].map((unit, i) => (
-                <div key={i} className="flex items-center gap-4">
-                  <div className="text-center">
-                    <div className="bg-white/20 border border-white/30 rounded-xl w-16 h-16 flex items-center justify-center">
-                      <span className="text-3xl font-black text-white font-display">
-                        {unit.val.toString().padStart(2, "0")}
-                      </span>
-                    </div>
-                    <span className="text-[9px] text-green-300 font-sans tracking-widest mt-1 block">{unit.label}</span>
-                  </div>
-                  {i < 2 && <span className="text-2xl font-black text-white/50 mb-5">:</span>}
-                </div>
-              ))}
-            </div>
-          </div>
         </div>
 
         <div className="text-center max-w-3xl mx-auto mb-10">
