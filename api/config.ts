@@ -4,7 +4,7 @@
 // number on any failure, so the site never breaks.
 import { get } from '@vercel/edge-config';
 
-const FALLBACK_WHATSAPP_NUMBER = '447414662070';
+const FALLBACK_WHATSAPP_NUMBER = '447449708976';
 
 export default async function handler(req: any, res: any) {
   if (req.method !== 'GET') {
